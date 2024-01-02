@@ -37,6 +37,10 @@ Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])
     ->middleware(['auth', 'verified'])
     ->name('projects.destroy');
 
+Route::get('/projects/{project}/edit', [ProjectController::class, 'edit'])
+    ->middleware(['auth', 'verified'])
+    ->name('projects.edit');
+
 
 
 Route::middleware('auth')->group(function () {

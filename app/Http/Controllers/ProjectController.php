@@ -32,4 +32,8 @@ class ProjectController extends Controller
         return Redirect::to('/dashboard');
     }
 
+    public function edit(Project $project)
+    {
+        return Inertia::render('Project/ProjectEdit', ['project' => $project]);
+    }
 }
