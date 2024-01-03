@@ -11,7 +11,10 @@ import { Head } from '@inertiajs/vue3';
 const { project, pages } = usePage().props;
 const toedit = ref({ type: 'project', data: project });
 
+
+
 const breadcrumbs = ref('');
+
 
 function generatedBreadcrumb(item) {
     let breadcrumb = project.name;
@@ -66,7 +69,8 @@ function handleCreatePage(projectId) {
 
 function handleSelect(item) {
     toedit.value = item;
-    breadcrumbs.value = generatedBreadcrumb(item);
+    console.log(toedit.value);
+    // breadcrumbs.value = generatedBreadcrumb(item);
 }
 
 watchEffect(() => {

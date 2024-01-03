@@ -19,6 +19,7 @@ watchEffect(() => {
   form.name = props.toedit.data.name; // Toto zajistí, že form.name se aktualizuje při každé změně props.toedit
 });
 
+// změna názvu
 function saveChanges() {
     let route;
 
