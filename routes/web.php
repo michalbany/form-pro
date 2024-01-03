@@ -29,18 +29,34 @@ Route::get('/', function () {
     ]);
 });
 
+// přesun na dashboard
 Route::get('/dashboard', [ProjectController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
+// smazání projektu
 Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])
     ->middleware(['auth', 'verified'])
     ->name('projects.destroy');
 
-Route::get('/projects/{project}/edit', [ProjectController::class, 'edit'])
+// Přesun na aktualizaci/vytvoření projektu
+
+    Route::get('/projects/{project}/edit', [ProjectController::class, 'edit'])
     ->middleware(['auth', 'verified'])
     ->name('projects.edit');
 
+Route::get('/projects/{projectId}/pages', [PageController::class, 'index'])
+    ->middleware(['auth', 'verified']);
+
+// @change Aktualizace projektu (nazev)
+Route::put('/projects/{project}', [ProjectController::class, 'update'])
+    ->middleware(['auth', 'verified'])
+    ->name('projects.update');
+
+// @change Aktualizace stránky (nazev)
+Route::put('/pages/{page}', [PageController::class, 'update'])
+    ->middleware(['auth', 'verified'])
+    ->name('pages.update');
 
 
 Route::middleware('auth')->group(function () {
