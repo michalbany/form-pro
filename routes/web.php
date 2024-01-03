@@ -58,6 +58,11 @@ Route::put('/pages/{page}', [PageController::class, 'update'])
     ->middleware(['auth', 'verified'])
     ->name('pages.update');
 
+// @note: přidání stránek a podstránek
+Route::post('/pages', [PageController::class, 'create'])
+    ->middleware(['auth', 'verified'])
+    ->name('pages.create');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

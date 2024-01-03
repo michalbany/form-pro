@@ -23,4 +23,16 @@ class PageController extends Controller
 
         return Redirect::back()->with('message', 'Page saved.');
     }
+
+    // funkce pro vytvoření nové stránky
+    public function create(Request $request) 
+    {
+        $page = new Page();
+        $page->project_id = $request->projectId;
+        $page->parent_id = $request->parentPageId ?? null;
+        $page->name = $request->name;
+        $page->save();
+
+        return Redirect::back()->with('message', 'Page created.');
+    }
 }

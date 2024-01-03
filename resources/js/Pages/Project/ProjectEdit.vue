@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watchEffect } from 'vue';
-import { usePage } from '@inertiajs/vue3';
+import { usePage, useForm } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import PageList from './Partials/PageList.vue';
 import PageDetail from './Partials/PageDetail.vue';
@@ -29,6 +29,40 @@ function generatedBreadcrumb(item) {
     return breadcrumb;
 }
 
+const subPageform = useForm({
+    name: 'Untitled',
+    projectId: project.id,
+    parentPageId: null,
+});
+
+const pageform = useForm({
+    name: 'Untitled',
+    projectId: null,
+});
+
+// vytváření nových stránek a podstránek
+function handleCreateSubPage(parentPageId) {
+    subPageform.parentPageId = parentPageId;
+    subPageform.post(route('pages.create'), {
+        preserveScroll: true,
+        onSuccess: () => {
+            // Toto je volitelné: reakce na úspěch
+        },
+
+    });
+}
+
+function handleCreatePage(projectId) {
+    pageform.projectId = projectId;
+
+    pageform.post(route('pages.create'), {
+        preserveScroll: true,
+        onSuccess: () => {
+            // Toto je volitelné: reakce na úspěch
+        }
+    });
+}
+
 
 function handleSelect(item) {
     toedit.value = item;
@@ -46,10 +80,10 @@ watchEffect(() => {
     <AuthenticatedLayout>
         <div class="flex">
 
-            <aside class="flex flex-col w-1/5 bg-white p-2">
-                <ProjectSettings :project="project" @select="handleSelect" />
+            <aside class="flex flex-col w-1/5 bg-white rounded-br-md p-2">
+                <ProjectSettings :project="project" @select="handleSelect" @createPage="handleCreatePage"/>
                 <div class="my-4 mt-1 border-gray-200 border-b"></div>
-                <PageList :pages="pages" @select="handleSelect" />
+                <PageList :pages="pages" @select="handleSelect" @createSubPage="handleCreateSubPage"/>
             </aside>
 
 
