@@ -10,17 +10,6 @@ use Illuminate\Support\Facades\Redirect;
 
 class PageController extends Controller
 {
-    // public function getNewPage($projectId, $pageId)
-    // {
-    //     $page = Page::where('id', $pageId)
-    //         ->where('project_id', $projectId)
-    //         ->first();
-        
-    //     return Inertia::render('Project/ProjectEdit', [
-    //         'page' => $page
-    //     ]);
-    // }
-
 
     public function update(Request $request, Page $page)
     {

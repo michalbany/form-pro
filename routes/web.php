@@ -34,6 +34,11 @@ Route::get('/dashboard', [ProjectController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
+// vytvoření nového projektu
+Route::post('/projects', [ProjectController::class, 'create'])
+    ->middleware(['auth', 'verified'])
+    ->name('projects.create');
+
 // smazání projektu
 Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])
     ->middleware(['auth', 'verified'])

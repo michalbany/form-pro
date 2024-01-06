@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Project;
+use App\Models\Page;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +18,22 @@ class ProjectController extends Controller
     {
         $projects = Project::all();
         return Inertia::render('Dashboard', ['projects' => $projects]);
+    }
+
+    public function create() {
+        // vytvoření nového projektu
+        $project = Project::create([
+            'name' => 'New project'
+        ]);
+
+        // vytvoření první stránky
+        $page = new Page();
+        $page->project_id = $project->id;
+        $page->name = 'Home';
+        $page->save();
+
+        return Redirect::to('/projects/' . $project->id . '/edit');
+
     }
 
     public function destroy(Request $request, Project $project)
