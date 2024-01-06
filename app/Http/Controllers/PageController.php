@@ -47,7 +47,6 @@ class PageController extends Controller
         return Redirect::back()->with('message', 'Page deleted.');
     }
 
-    // @note: this is OK but na frontendu to dělá shit takže teď pass pokud má subpages tak se to nesmaže frontend to zablokuje
     private function deletePageAndChildren($page)
     {
         $subpages = Page::where('parent_id', $page->id)->get();

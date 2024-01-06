@@ -43,15 +43,26 @@ class ProjectController extends Controller
             return back()->withErrors(['password' => 'The password is incorrect.']);
         }
 
-        // nejprve smažeme všechny stránky
+        // nejprve smažeme všechny stránky a podstránky
         foreach ($project->pages as $page) {
-            $page->delete();
+            $this->deletePageAndChildren($page);
         }
 
         // Smazání projektu
         $project->delete();
 
         return Redirect::to('/dashboard');
+    }
+
+    private function deletePageAndChildren($page)
+    {
+        $subpages = Page::where('parent_id', $page->id)->get();
+
+        foreach ($subpages as $subpage) {
+            $this->deletePageAndChildren($subpage);
+        }
+
+        $page->delete();
     }
 
     /**

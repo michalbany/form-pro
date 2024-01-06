@@ -7,6 +7,14 @@ import PageDetail from './Partials/PageDetail.vue';
 import ProjectSettings from './Partials/ProjectSettings.vue';
 import { Head } from '@inertiajs/vue3';
 
+/**
+ *  @bug když přejmenuju stránku a potom udělám akci, tak se z nějakého důvodu nastaví jména stránek na původní po refreshi
+ *  Je to u všech stránek po tom co vytvořím novou stránku
+ *  U mazani stanek je to v pohodě
+ * @idea: chyba je v createPage
+ * 
+ * */
+
 
 const { project } = usePage().props;
 const toedit = ref({ type: 'project', data: project });
