@@ -45,15 +45,28 @@ class PageController extends Controller
         $page->name = $request->name;
         $page->save();
 
-        $pages = Page::where('project_id', $request->projectId)
-            ->get();
-
-        // return redirect()->route('pages.newpage', ['projectId' => $request->projectId, 'pageId' => $page->id]);
-    
-        // return Redirect::back()->with(['pages' => $pages, 'page' => $page]);
-
         return Redirect::back()->with('message', 'Page created.');
+    }
 
-        // return Redirect::route('pages.newpage', ['projectId' => $request->projectId, 'pageId' => $page->id]);
+    // mazání stránky (a všech jejích podstránek), request je zde proto, aby se mohlo ověřit heslo
+    public function destroy(Request $request, Page $page)
+    {
+        // přidání podmínky, že pokud má postránky, tak se smažou (pokud se tak nestane automaticky)
+
+        $this->deletePageAndChildren($page);
+
+        return Redirect::back()->with('message', 'Page deleted.');
+    }
+
+    // @note: this is OK but na frontendu to dělá shit takže teď pass pokud má subpages tak se to nesmaže frontend to zablokuje
+    private function deletePageAndChildren($page)
+    {
+        $subpages = Page::where('parent_id', $page->id)->get();
+
+        foreach ($subpages as $subpage) {
+            $this->deletePageAndChildren($subpage);
+        }
+
+        $page->delete();
     }
 }

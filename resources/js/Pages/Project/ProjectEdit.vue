@@ -8,8 +8,11 @@ import ProjectSettings from './Partials/ProjectSettings.vue';
 import { Head } from '@inertiajs/vue3';
 
 
-const { project, pages } = usePage().props;
+const { project } = usePage().props;
 const toedit = ref({ type: 'project', data: project });
+const pages = ref(usePage().props.pages);
+
+
 
 const breadcrumbs = ref('');
 
@@ -25,6 +28,33 @@ const pageform = useForm({
     projectId: null,
 });
 
+const deletePageForm = useForm({
+    page: null,
+    // withsubpages: false,
+});
+
+function handleDelete(item) {
+    deletePageForm.page = item;
+    // console.log(item.parent_id);
+
+    // if (item.parent_id !== null) {
+    //     alert('This page has subpages. Delete them first.');
+    //     return; 
+    // }
+    deletePageForm.delete(route('pages.destroy', deletePageForm.page), {
+        preserveScroll: true,
+        onSuccess: (response) => {
+            console.log(response);
+            // const index = pages.findIndex(p => p.id === deletePageForm.page.id);
+            // if (index !== -1) {
+            //     pages.splice(index, 1);
+            // }
+            pages.value = response.props.pages;
+            handleSelect({ type: 'project', data: project });
+        },
+    });
+}
+
 // vytváření nových stránek a podstránek
 function handleCreateSubPage(parentPageId) {
     subPageform.parentPageId = parentPageId;
@@ -33,7 +63,7 @@ function handleCreateSubPage(parentPageId) {
         onSuccess: (response) => {
             const pageToInsert = response.props.pages[response.props.pages.length - 1];
 
-            pages.push(pageToInsert);
+            pages.value.push(pageToInsert);
             handleSelect({ type: 'page', data: pageToInsert});
         },
 
@@ -48,7 +78,7 @@ function handleCreatePage(projectId) {
         onSuccess: (response) => {
             const pageToInsert = response.props.pages[response.props.pages.length - 1];
 
-            pages.push(pageToInsert);
+            pages.value.push(pageToInsert);
             handleSelect({ type: 'page', data: pageToInsert});
         }
     });
@@ -62,7 +92,7 @@ function handleSelect(item) {
 
 watchEffect(() => {
     // bread.value = toedit.value;
-    breadcrumbs.value = generatedBreadcrumb(toedit.value, pages);
+    breadcrumbs.value = generatedBreadcrumb(toedit.value, pages.value);
 });
 
 
@@ -101,10 +131,12 @@ function generatedBreadcrumb(item, pages) {
     <AuthenticatedLayout>
         <div class="flex">
 
-            <aside class="flex flex-col w-72 bg-white rounded-br-md p-2">
+            <aside class="flex flex-col w-80 bg-white rounded-br-md p-2">
                 <ProjectSettings :project="project" @select="handleSelect" @create-page="handleCreatePage"/>
                 <div class="my-4 mt-1 border-gray-200 border-b"></div>
-                <PageList :pages="pages" @select="handleSelect" @create-sub-page="handleCreateSubPage"/>
+                
+                <!--@note tady idk jaktože funguje pages i když je na ref asi kvuli map()-->
+                <PageList :pages="pages" @select="handleSelect" @create-sub-page="handleCreateSubPage" @delete-page="handleDelete"/>
             </aside>
 
 
