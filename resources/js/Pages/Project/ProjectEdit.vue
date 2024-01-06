@@ -7,15 +7,6 @@ import PageDetail from './Partials/PageDetail.vue';
 import ProjectSettings from './Partials/ProjectSettings.vue';
 import { Head } from '@inertiajs/vue3';
 
-/**
- *  @bug když přejmenuju stránku a potom udělám akci, tak se z nějakého důvodu nastaví jména stránek na původní po refreshi
- *  Je to u všech stránek po tom co vytvořím novou stránku
- *  U mazani stanek je to v pohodě
- * @idea: chyba je v createPage
- * 
- * */
-
-
 const { project } = usePage().props;
 const toedit = ref({ type: 'project', data: project });
 const pages = ref(usePage().props.pages);
@@ -69,10 +60,11 @@ function handleCreateSubPage(parentPageId) {
     subPageform.post(route('pages.create'), {
         preserveScroll: true,
         onSuccess: (response) => {
-            const pageToInsert = response.props.pages[response.props.pages.length - 1];
+            const pageToSelect = response.props.pages[response.props.pages.length - 1];
 
-            pages.value.push(pageToInsert);
-            handleSelect({ type: 'page', data: pageToInsert});
+            // pages.value.push(pageToInsert);
+            pages.value = response.props.pages;
+            handleSelect({ type: 'page', data: pageToSelect});
         },
 
     });
@@ -84,10 +76,11 @@ function handleCreatePage(projectId) {
     pageform.post(route('pages.create'), {
         preserveScroll: true,
         onSuccess: (response) => {
-            const pageToInsert = response.props.pages[response.props.pages.length - 1];
+            const pageToSelect = response.props.pages[response.props.pages.length - 1];
 
-            pages.value.push(pageToInsert);
-            handleSelect({ type: 'page', data: pageToInsert});
+            // pages.value.push(pageToInsert);
+            pages.value = response.props.pages;
+            handleSelect({ type: 'page', data: pageToSelect});
         }
     });
 }
