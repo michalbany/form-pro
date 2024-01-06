@@ -10,6 +10,18 @@ use Illuminate\Support\Facades\Redirect;
 
 class PageController extends Controller
 {
+    // public function getNewPage($projectId, $pageId)
+    // {
+    //     $page = Page::where('id', $pageId)
+    //         ->where('project_id', $projectId)
+    //         ->first();
+        
+    //     return Inertia::render('Project/ProjectEdit', [
+    //         'page' => $page
+    //     ]);
+    // }
+
+
     public function update(Request $request, Page $page)
     {
         $validatedData = $request->validate([
@@ -25,7 +37,7 @@ class PageController extends Controller
     }
 
     // funkce pro vytvoření nové stránky
-    public function create(Request $request) 
+    public function create(Request $request)
     {
         $page = new Page();
         $page->project_id = $request->projectId;
@@ -33,6 +45,15 @@ class PageController extends Controller
         $page->name = $request->name;
         $page->save();
 
+        $pages = Page::where('project_id', $request->projectId)
+            ->get();
+
+        // return redirect()->route('pages.newpage', ['projectId' => $request->projectId, 'pageId' => $page->id]);
+    
+        // return Redirect::back()->with(['pages' => $pages, 'page' => $page]);
+
         return Redirect::back()->with('message', 'Page created.');
+
+        // return Redirect::route('pages.newpage', ['projectId' => $request->projectId, 'pageId' => $page->id]);
     }
 }

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watchEffect } from 'vue';
+import { ref, watchEffect, computed } from 'vue';
 import { usePage, useForm } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import PageList from './Partials/PageList.vue';
@@ -11,26 +11,8 @@ import { Head } from '@inertiajs/vue3';
 const { project, pages } = usePage().props;
 const toedit = ref({ type: 'project', data: project });
 
-
-
 const breadcrumbs = ref('');
 
-
-function generatedBreadcrumb(item) {
-    let breadcrumb = project.name;
-
-    if (item.type === 'page') {
-        // Přidáme název stránky a její rodiče, pokud existují
-        breadcrumb += ' / ' + item.data.name;
-        let parent = item.data.parent;
-        while (parent) {
-            breadcrumb = parent.name + ' / ' + breadcrumb;
-            parent = parent.parent;
-        }
-    }
-
-    return breadcrumb;
-}
 
 const subPageform = useForm({
     name: 'Untitled',
@@ -48,8 +30,11 @@ function handleCreateSubPage(parentPageId) {
     subPageform.parentPageId = parentPageId;
     subPageform.post(route('pages.create'), {
         preserveScroll: true,
-        onSuccess: () => {
-            // Toto je volitelné: reakce na úspěch
+        onSuccess: (response) => {
+            const pageToInsert = response.props.pages[response.props.pages.length - 1];
+
+            pages.push(pageToInsert);
+            handleSelect({ type: 'page', data: pageToInsert});
         },
 
     });
@@ -60,8 +45,11 @@ function handleCreatePage(projectId) {
 
     pageform.post(route('pages.create'), {
         preserveScroll: true,
-        onSuccess: () => {
-            // Toto je volitelné: reakce na úspěch
+        onSuccess: (response) => {
+            const pageToInsert = response.props.pages[response.props.pages.length - 1];
+
+            pages.push(pageToInsert);
+            handleSelect({ type: 'page', data: pageToInsert});
         }
     });
 }
@@ -69,14 +57,43 @@ function handleCreatePage(projectId) {
 
 function handleSelect(item) {
     toedit.value = item;
-    console.log(toedit.value);
-    // breadcrumbs.value = generatedBreadcrumb(item);
+    // console.log(toedit.value);
 }
 
 watchEffect(() => {
     // bread.value = toedit.value;
-    breadcrumbs.value = generatedBreadcrumb(toedit.value);
+    breadcrumbs.value = generatedBreadcrumb(toedit.value, pages);
 });
+
+
+// 3 funkce pro generování breadcrumb
+function findPageById(pageId, pages) {
+    return pages.find(page => page.id === pageId);
+}
+
+function generateBreadcrumbPath(page, pages, path = []) {
+    if (page.parent_id) {
+        const parentPage = findPageById(page.parent_id, pages);
+        if (parentPage) {
+            path.unshift(parentPage.name);
+            generateBreadcrumbPath(parentPage, pages, path);
+        }
+    }
+    return path;
+}
+
+function generatedBreadcrumb(item, pages) {
+    let breadcrumb = [project.name];
+
+    if (item.type === 'page') {
+        const breadcrumbPath = generateBreadcrumbPath(item.data, pages);
+        breadcrumb = [...breadcrumb, ...breadcrumbPath, item.data.name];
+    }
+
+    return breadcrumb.join(' / ');
+    
+}
+
 </script>
 
 <template>
@@ -84,10 +101,10 @@ watchEffect(() => {
     <AuthenticatedLayout>
         <div class="flex">
 
-            <aside class="flex flex-col w-1/5 bg-white rounded-br-md p-2">
-                <ProjectSettings :project="project" @select="handleSelect" @createPage="handleCreatePage"/>
+            <aside class="flex flex-col w-72 bg-white rounded-br-md p-2">
+                <ProjectSettings :project="project" @select="handleSelect" @create-page="handleCreatePage"/>
                 <div class="my-4 mt-1 border-gray-200 border-b"></div>
-                <PageList :pages="pages" @select="handleSelect" @createSubPage="handleCreateSubPage"/>
+                <PageList :pages="pages" @select="handleSelect" @create-sub-page="handleCreateSubPage"/>
             </aside>
 
 

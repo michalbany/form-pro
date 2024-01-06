@@ -1,53 +1,26 @@
 <script setup>
-import { defineProps, defineEmits, reactive, watchEffect } from 'vue';
-import PageSubpage from './PageSubpage.vue';
-
+import { defineProps, defineEmits } from 'vue';
 
 const props = defineProps({
-    pages: Array,
+    subpages: Object,
 });
-
 
 const emit = defineEmits(['select', 'create-sub-page']);
 
-const pageHierarchy = reactive({ hierarchy: [] });
-
-// funkce pro vytvoření hiararchie stránek a podstránek
-function createHierarchy(pages) {
-    let map = new Map(pages.map(page => [page.id, {...page, subpages: [], open: false}]));
-
-    pageHierarchy.hierarchy = [];
-    pages.forEach(page => {
-        if (page.parent_id) {
-            map.get(page.parent_id).subpages.push(map.get(page.id));
-        } else {
-            pageHierarchy.hierarchy.push(map.get(page.id));
-        }
-    });
-}
-
-watchEffect(() => {
-    createHierarchy(props.pages);
-});
-
-
-// funkce pro výběr stránky
 function selectPage(page) {
-    // console.log(page);
-    emit('select', { type: 'page', data: page });
+    emit('select', page);
 }
-// funkce pro vytvoření nové stránky
+
 function createSubPage(parentPageId) {
     emit('create-sub-page', parentPageId);
 }
 
-
 </script>
 
 <template>
+        <ul v-show="subpages.open" class="flex pl-6 flex-col gap-1">
+        <li v-for="page in subpages.subpages" :key="page.id">
 
-    <ul class="flex flex-col gap-1">
-        <li v-for="page in pageHierarchy.hierarchy" :key="page.id">
 
             <a @click.prevent="selectPage(page)"
                 class="flex cursor-pointer relative justify-between align-center w-full items-center px-3 py-2 bg-white rounded-md text-sm text-gray-700 uppercase tracking-widest hover:bg-gray-100 focus:outline-none disabled:opacity-25 transition ease-in-out duration-150">
@@ -71,7 +44,7 @@ function createSubPage(parentPageId) {
             
             {{ page.name }}
         </div>
-
+            
                 <a @click.prevent="createSubPage(page.id)" class="group cursor-pointer transition duration-150 ease-in-out hover:bg-gray-300 rounded-md">
                     <svg class="h-5 w-5" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 12H18M12 6v12" />
@@ -81,13 +54,11 @@ function createSubPage(parentPageId) {
                         Add page inside</p>
                 </a>
             </a>
-            <PageSubpage 
+            <PageSubpage
                 v-if="page.subpages.length > 0" 
                 :subpages="page"
                 @select="selectPage"
-                @create-sub-page="createSubPage"
-                />
+                @create-sub-page="createSubPage"/>
         </li>
     </ul>
 </template>
-

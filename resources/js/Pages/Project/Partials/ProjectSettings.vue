@@ -5,7 +5,7 @@ const props = defineProps({
   project: Object
 });
 
-const emit = defineEmits(['select', 'createPage']);
+const emit = defineEmits(['select', 'create-page']);
 
 // funkce pro výběr projektu
 function selectProject() {
@@ -14,7 +14,7 @@ function selectProject() {
 
 // funkce pro vytvoření nové stránky
 function createPage() {
-  emit('createPage', props.project.id);
+  emit('create-page', props.project.id);
 }
 </script>
 

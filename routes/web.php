@@ -40,13 +40,9 @@ Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])
     ->name('projects.destroy');
 
 // Přesun na aktualizaci/vytvoření projektu
-
-    Route::get('/projects/{project}/edit', [ProjectController::class, 'edit'])
+Route::get('/projects/{project}/edit', [ProjectController::class, 'edit'])
     ->middleware(['auth', 'verified'])
     ->name('projects.edit');
-
-Route::get('/projects/{projectId}/pages', [PageController::class, 'index'])
-    ->middleware(['auth', 'verified']);
 
 // @change Aktualizace projektu (nazev)
 Route::put('/projects/{project}', [ProjectController::class, 'update'])
@@ -63,6 +59,9 @@ Route::post('/pages', [PageController::class, 'create'])
     ->middleware(['auth', 'verified'])
     ->name('pages.create');
 
+Route::delete('/pages/{page}', [PageController::class, 'destroy'])
+    ->middleware(['auth', 'verified'])
+    ->name('pages.destroy');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
