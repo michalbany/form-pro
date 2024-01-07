@@ -13,12 +13,13 @@ const props = defineProps({
 });
 
 
+// console.log(props.toedit.data.id);
+
 const page = ref(props.toedit);
 
 watchEffect(() => {
     page.value = props.toedit;
 });
-
 
 // console.log(page.value);
 
@@ -72,7 +73,7 @@ function saveChanges() {
                     <TitleInput
                     id="name"
                     type="text"
-                    class="mt-1 block w-full"
+                    class="mt-1 block w-full text-3xl"
                     v-model="form.name"
                     placeholder="Enter new title"
                     autocomplete="off"
@@ -98,7 +99,7 @@ function saveChanges() {
     </section>
 
     
-    <TextField v-if="props.toedit.type === 'page'" :toedit="props.toedit" />
+    <TextField v-if="props.toedit.type === 'page'" :toedit="page" />
 
     <section v-else>
         <p class="text-gray-600 mt-4">Zde bude možnost vygenerovat klíč pro klienta + zobrazit lidi, kteří na projektu pracují.</p>

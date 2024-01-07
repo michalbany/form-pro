@@ -8,6 +8,18 @@ const props = defineProps({
     toedit: Object
 });
 
+// console.log(props);
+
+const toedit = ref(props.toedit);
+
+watchEffect(() => {
+    toedit.value = props.toedit;
+
+    // console.log(toedit.value);
+
+});
+
+
 const textfields = ref([]);
 
 watchEffect(() => {
@@ -16,17 +28,20 @@ watchEffect(() => {
     }
 });
 
-console.log(textfields.value);
+// console.log(props.toedit.data);
+
+
 
 
 const createFieldForm = useForm({
     label: 'New Input Field',
     content: '',
     recommended_length: '300',
-    page_id: props.toedit.data.id,
-})
+    page_id: null,
+});
 
-function createField() {
+function createField(page_id) {
+    createFieldForm.page_id = page_id;
     createFieldForm.post(route('fields.create'), {
         preserveScroll: true,
         onSuccess: (response) => {
@@ -53,16 +68,20 @@ function createField() {
 
 <section v-for="textfield in textfields" :key="textfield.id">
 
-    <div>{{ textfield.id }}</div>
-    <div>{{ textfield.label }}</div>
-    <div>{{ textfield.content }}</div>
-    <div>{{ textfield.recommended_length }}</div>
+    
+
+    <InputField
+        :id="textfield.id"
+        :label="textfield.label"
+        :content="textfield.content"
+        :recommended_length="textfield.recommended_length"
+    />
 
 
 </section>
 
-<PrimaryButton @click="createField">Add field</PrimaryButton>
-{{ props.toedit.data.id }}
+<PrimaryButton class="mt-4 bg-indigo-700 hover:bg-indigo-800" @click="createField(toedit.data.id)">Add field</PrimaryButton>
+<!-- {{ props.toedit.data.id }} -->
 
 
 

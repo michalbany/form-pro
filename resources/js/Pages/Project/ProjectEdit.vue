@@ -92,7 +92,7 @@ function handleCreatePage(projectId) {
 
 function handleSelect(item) {
     toedit.value = item;
-    // console.log(toedit.value);
+    // console.log(toedit.value.data.id);
 }
 
 watchEffect(() => {
