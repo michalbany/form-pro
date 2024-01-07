@@ -57,4 +57,6 @@ class PageController extends Controller
 
         $page->delete();
     }
+
+    // @idea @todo: V Page modelu jsou funkce přímo na select Children a Parents atd.
 }

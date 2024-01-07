@@ -6,10 +6,21 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TitleInput from '@/Components/TitleInput.vue';
+import TextField from './TextField.vue';  
 
 const props = defineProps({
     toedit: Object
 });
+
+
+const page = ref(props.toedit);
+
+watchEffect(() => {
+    page.value = props.toedit;
+});
+
+
+// console.log(page.value);
 
 const form = useForm({
     name: '', // Toto nastaví počáteční hodnotu názvu
@@ -83,6 +94,14 @@ function saveChanges() {
             </div>
             
         </form>
+        <!-- @remove {{ props.toedit.data.name }} -->
+    </section>
+
+    
+    <TextField v-if="props.toedit.type === 'page'" :toedit="props.toedit" />
+
+    <section v-else>
+        <p class="text-gray-600 mt-4">Zde bude možnost vygenerovat klíč pro klienta + zobrazit lidi, kteří na projektu pracují.</p>
     </section>
     </main>
 </template>

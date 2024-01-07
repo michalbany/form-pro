@@ -1,0 +1,3 @@
+<template>
+    has child
+</template>

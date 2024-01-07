@@ -73,10 +73,15 @@ class ProjectController extends Controller
     {
         // Načtení projektu spolu se všemi jeho stránkami
         $projectWithPages = Project::with('pages')->findOrFail($project->id);
+        
+        foreach ($projectWithPages->pages as $page) {
+            $page->textfields = $page->textfields;
+        }
 
         return Inertia::render('Project/ProjectEdit', [
             'project' => $projectWithPages,
-            'pages' => $projectWithPages->pages
+            'pages' => $projectWithPages->pages,
+            
         ]);
     }
 

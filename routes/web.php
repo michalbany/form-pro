@@ -64,9 +64,16 @@ Route::post('/pages', [PageController::class, 'create'])
     ->middleware(['auth', 'verified'])
     ->name('pages.create');
 
+// @note: smazání stránky a podstránek
 Route::delete('/pages/{page}', [PageController::class, 'destroy'])
     ->middleware(['auth', 'verified'])
     ->name('pages.destroy');
+
+
+// @note: přidání textového pole
+Route::post('textfields', [TextFieldController::class, 'create'])
+    ->middleware(['auth', 'verified'])
+    ->name('fields.create');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
