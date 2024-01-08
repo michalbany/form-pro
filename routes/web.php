@@ -75,6 +75,14 @@ Route::post('textfields', [TextFieldController::class, 'create'])
     ->middleware(['auth', 'verified'])
     ->name('fields.create');
 
+Route::delete('textfields/{id}', [TextFieldController::class, 'destroy'])
+    ->middleware(['auth', 'verified'])
+    ->name('fields.destroy');
+
+Route::put('textfields/{id}', [TextFieldController::class, 'update'])
+    ->middleware(['auth', 'verified'])
+    ->name('fields.update');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

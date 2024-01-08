@@ -10,11 +10,6 @@ import { Head } from '@inertiajs/vue3';
 const { project } = usePage().props;
 const toedit = ref({ type: 'project', data: project });
 const pages = ref(usePage().props.pages);
-// const textfields = ref(usePage().props.pages.textfields);
-
-
-// console.log(pages.value);
-
 
 
 const breadcrumbs = ref('');
@@ -38,20 +33,10 @@ const deletePageForm = useForm({
 
 function handleDelete(item) {
     deletePageForm.page = item;
-    // console.log(item.parent_id);
-
-    // if (item.parent_id !== null) {
-    //     alert('This page has subpages. Delete them first.');
-    //     return; 
-    // }
     deletePageForm.delete(route('pages.destroy', deletePageForm.page), {
         preserveScroll: true,
         onSuccess: (response) => {
-            // console.log(response);
-            // const index = pages.findIndex(p => p.id === deletePageForm.page.id);
-            // if (index !== -1) {
-            //     pages.splice(index, 1);
-            // }
+            // aktualizujeme seznam polí
             pages.value = response.props.pages;
             handleSelect({ type: 'project', data: project });
         },

@@ -8,35 +8,32 @@ const props = defineProps({
     toedit: Object
 });
 
-// console.log(props);
-
 const toedit = ref(props.toedit);
+
 
 watchEffect(() => {
     toedit.value = props.toedit;
+    // console.log(toedit.value.data);
 
-    // console.log(toedit.value);
 
 });
 
-
 const textfields = ref([]);
+
 
 watchEffect(() => {
     if (props.toedit.data && props.toedit.data.textfields) {
         textfields.value = props.toedit.data.textfields;
     }
+    // console.log(textfields.value);
 });
-
-// console.log(props.toedit.data);
-
 
 
 
 const createFieldForm = useForm({
     label: 'New Input Field',
     content: '',
-    recommended_length: '300',
+    recommended_length: 300,
     page_id: null,
 });
 
@@ -46,41 +43,76 @@ function createField(page_id) {
         preserveScroll: true,
         onSuccess: (response) => {
             // aktualizujeme seznam polí
+
+            // v response najdeme index, kde je page_id a vybereme z něj nová pole
+            const index = response.props.pages.findIndex(p => p.id === page_id);
+
+            if (index !== -1) {
+                textfields.value = response.props.pages[index].textfields;
+                props.toedit.data.textfields = response.props.pages[index].textfields;
+            }
+
+            // console.log(response);
         }
     });
+}
+
+const deleteFieldForm = useForm({
+    textfield: null,
+    // withsubpages: false,
+});
+
+
+function handleDeleteField(field) {
+    deleteFieldForm.textfield = field;
+    deleteFieldForm.delete(route('fields.destroy', deleteFieldForm.textfield), {
+        preserveScroll: true,
+        onSuccess: (response) => {
+            // aktualizujeme seznam polí
+
+            // vezmeme id aktuální stránky
+            const page_id = props.toedit.data.id;
+            console.log(page_id);            
+            // v response najdeme index, kde je page_id a vybereme z něj nová pole
+            const index = response.props.pages.findIndex(p => p.id === page_id);
+
+            if (index !== -1) {
+                textfields.value = response.props.pages[index].textfields;
+                props.toedit.data.textfields = response.props.pages[index].textfields;
+            }
+            
+        },
+        onError: () => {
+            // console.log('error');
+        }
+    });
+}
+
+function handleUpdateField(field) {
+    const index = textfields.value.findIndex(f => f.id === field.id);
+
+    if (index !== -1) {
+        textfields.value[index] = field;
+    }	
 }
 
 </script>
 
 <template>
-<!-- {{ pageName.value.data.name }} -->
-
-<!-- <section v-for="textfield in textfields.value" :key="textfield.value.id"> -->
-
-    <!-- <InputField 
-        :title="field.label"
-        :content="field.content"
-        :length="field.recommended_length"
-    /> -->
-        <!-- this is: {{ textfield.label }} -->
-    
-<!-- </section> -->
-
 <section v-for="textfield in textfields" :key="textfield.id">
 
     
 
     <InputField
-        :id="textfield.id"
-        :label="textfield.label"
-        :content="textfield.content"
-        :recommended_length="textfield.recommended_length"
+        :textfield="textfield"
+        @update="handleUpdateField"
+        @delete="handleDeleteField"
     />
 
 
 </section>
 
-<PrimaryButton class="mt-4 bg-indigo-700 hover:bg-indigo-800" @click="createField(toedit.data.id)">Add field</PrimaryButton>
+<PrimaryButton class="my-4 bg-indigo-700 hover:bg-indigo-800" @click="createField(toedit.data.id)">Add field</PrimaryButton>
 <!-- {{ props.toedit.data.id }} -->
 
 
