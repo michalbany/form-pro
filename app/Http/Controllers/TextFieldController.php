@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Redirect;
 class TextFieldController extends Controller
 {
    
-    // @note: Pravděpodobně nebudeme potřebovat Page $page
     public function create(Request $request)
     {
         $field = TextField::create([
@@ -50,5 +49,4 @@ class TextFieldController extends Controller
         return Redirect::back()->with('message', 'Text field deleted.');
     }
 
-    // @todo: Při mazání stránek, podstránek a projektů je nutné smazat i všechny textové pole
 }

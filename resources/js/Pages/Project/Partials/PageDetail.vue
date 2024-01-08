@@ -13,22 +13,19 @@ const props = defineProps({
 });
 
 
-// console.log(props.toedit.data.id);
-
 const page = ref(props.toedit);
 
 watchEffect(() => {
     page.value = props.toedit;
 });
 
-// console.log(page.value);
 
 const form = useForm({
-    name: '', // Toto nastaví počáteční hodnotu názvu
+    name: '',
 });
 
 watchEffect(() => {
-  form.name = props.toedit.data.name; // Toto zajistí, že form.name se aktualizuje při každé změně props.toedit
+  form.name = props.toedit.data.name;
 });
 
 // změna názvu
@@ -53,7 +50,7 @@ function saveChanges() {
             props.toedit.data.name = form.name;
         },
         onError: () => {
-            // Toto je volitelné: reakce na chyby
+            //
         }
     });
 }
@@ -95,7 +92,6 @@ function saveChanges() {
             </div>
             
         </form>
-        <!-- @remove {{ props.toedit.data.name }} -->
     </section>
 
     

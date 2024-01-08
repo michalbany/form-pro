@@ -40,7 +40,6 @@ class PageController extends Controller
     // mazání stránky (a všech jejích podstránek), request je zde proto, aby se mohlo ověřit heslo
     public function destroy(Request $request, Page $page)
     {
-        // přidání podmínky, že pokud má postránky, tak se smažou (pokud se tak nestane automaticky)
 
         $this->deletePageAndChildren($page);
 

@@ -5,7 +5,7 @@ import { Head, Link, useForm } from '@inertiajs/vue3';
 
 
 const createProjectForm = useForm({
-    'name': '', // Hodnota definovaná v backendu
+    'name': '', // Hodnotu přiřazuje Laravel
 });
 
 function createNewProject() {
@@ -16,7 +16,7 @@ function createNewProject() {
             //
         },
         onError: () => {
-            // Toto je volitelné: reakce na chyby
+            // 
         }
     });
 }

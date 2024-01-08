@@ -28,19 +28,21 @@ function createHierarchy(pages) {
 
 watchEffect(() => {
     createHierarchy(props.pages);
+
+    console.log(pageHierarchy.hierarchy);
 });
 
 
 // funkce pro výběr stránky
 function selectPage(page) {
-    // console.log(page);
     emit('select', { type: 'page', data: page });
 }
 // funkce pro vytvoření nové stránky
 function createSubPage(parentPageId) {
     emit('create-sub-page', parentPageId);
-}
 
+}
+// funkce pro smazání stránky
 function deletePage(page) {
     emit('delete-page', page);
 }

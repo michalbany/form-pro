@@ -24,6 +24,7 @@ function deleteField() {
     emit("delete", props.textfield);
 }
 
+// poslaní změn na server a aktualizace seznamu polí v rodiči
 function updateField() {
     if (form.label === "") {
         form.label = "Untitled";

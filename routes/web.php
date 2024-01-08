@@ -75,10 +75,12 @@ Route::post('textfields', [TextFieldController::class, 'create'])
     ->middleware(['auth', 'verified'])
     ->name('fields.create');
 
+// @note: smazání textového pole
 Route::delete('textfields/{id}', [TextFieldController::class, 'destroy'])
     ->middleware(['auth', 'verified'])
     ->name('fields.destroy');
 
+// @note: aktualizace textového pole
 Route::put('textfields/{id}', [TextFieldController::class, 'update'])
     ->middleware(['auth', 'verified'])
     ->name('fields.update');

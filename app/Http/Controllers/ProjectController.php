@@ -78,6 +78,7 @@ class ProjectController extends Controller
         // Načtení projektu spolu se všemi jeho stránkami
         $projectWithPages = Project::with('pages')->findOrFail($project->id);
         
+        // a všemi textovými poli
         foreach ($projectWithPages->pages as $page) {
             $page->textfields = $page->textfields;
         }

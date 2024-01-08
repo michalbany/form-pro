@@ -28,7 +28,6 @@ const pageform = useForm({
 
 const deletePageForm = useForm({
     page: null,
-    // withsubpages: false,
 });
 
 function handleDelete(item) {
@@ -51,9 +50,9 @@ function handleCreateSubPage(parentPageId) {
         onSuccess: (response) => {
             const pageToSelect = response.props.pages[response.props.pages.length - 1];
 
-            // pages.value.push(pageToInsert);
             pages.value = response.props.pages;
             handleSelect({ type: 'page', data: pageToSelect});
+            pageToSelect.open = true;
         },
 
     });
@@ -67,7 +66,6 @@ function handleCreatePage(projectId) {
         onSuccess: (response) => {
             const pageToSelect = response.props.pages[response.props.pages.length - 1];
 
-            // pages.value.push(pageToInsert);
             pages.value = response.props.pages;
             handleSelect({ type: 'page', data: pageToSelect});
         }
@@ -77,11 +75,9 @@ function handleCreatePage(projectId) {
 
 function handleSelect(item) {
     toedit.value = item;
-    // console.log(toedit.value.data.id);
 }
 
 watchEffect(() => {
-    // bread.value = toedit.value;
     breadcrumbs.value = generatedBreadcrumb(toedit.value, pages.value);
 });
 
@@ -125,7 +121,6 @@ function generatedBreadcrumb(item, pages) {
                 <ProjectSettings :project="project" @select="handleSelect" @create-page="handleCreatePage"/>
                 <div class="my-4 mt-1 border-gray-200 border-b"></div>
                 
-                <!--@note tady idk jaktože funguje pages i když je na ref asi kvuli map()-->
                 <PageList :pages="pages" @select="handleSelect" @create-sub-page="handleCreateSubPage" @delete-page="handleDelete"/>
             </aside>
 
