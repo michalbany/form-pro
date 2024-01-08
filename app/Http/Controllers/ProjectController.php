@@ -56,10 +56,14 @@ class ProjectController extends Controller
 
     private function deletePageAndChildren($page)
     {
-        $subpages = Page::where('parent_id', $page->id)->get();
 
-        foreach ($subpages as $subpage) {
-            $this->deletePageAndChildren($subpage);
+        // rekurzivně projdeme všechny postránky a jejich textová pole a smažeme je
+        foreach ($page->textFields as $textField) {
+            $textField->delete();
+        }
+
+        foreach ($page->children as $child) {
+            $this->deletePageAndChildren($child);
         }
 
         $page->delete();

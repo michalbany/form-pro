@@ -49,14 +49,15 @@ class PageController extends Controller
 
     private function deletePageAndChildren($page)
     {
-        $subpages = Page::where('parent_id', $page->id)->get();
-
-        foreach ($subpages as $subpage) {
-            $this->deletePageAndChildren($subpage);
+        foreach ($page->textFields as $textField) {
+            $textField->delete();
         }
 
+        foreach ($page->children as $child) {
+            $this->deletePageAndChildren($child);
+        }
+    
         $page->delete();
     }
 
-    // @idea @todo: V Page modelu jsou funkce přímo na select Children a Parents atd.
 }
