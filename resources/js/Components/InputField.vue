@@ -1,13 +1,13 @@
 <script setup>
-import { defineProps, defineEmits, ref, watchEffect, computed } from "vue";
-import { useForm } from "@inertiajs/vue3";
-import TitleInput from "@/Components/TitleInput.vue";
-import InputLabel from "@/Components/InputLabel.vue";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
-import DangerButton from "@/Components/DangerButton.vue";
+import { defineProps, defineEmits, ref, watchEffect, computed } from 'vue';
+import { useForm } from '@inertiajs/vue3';
+import TitleInput from '@/Components/TitleInput.vue';
+import InputLabel from '@/Components/InputLabel.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import DangerButton from '@/Components/DangerButton.vue';
 
 const props = defineProps({
-    textfield: Object,
+    textfield: Object
 });
 const emit = defineEmits(["update", "delete"]);
 

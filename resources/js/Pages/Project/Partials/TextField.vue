@@ -1,8 +1,8 @@
 <script setup>
-import { defineProps, ref, watchEffect } from "vue";
-import { useForm, usePage } from "@inertiajs/vue3";
-import PrimaryButton from "@/Components/PrimaryButton.vue";
-import InputField from "@/Components/InputField.vue";
+import { defineProps, ref, watchEffect } from 'vue';
+import { useForm, usePage } from '@inertiajs/vue3';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import InputField from '@/Components/InputField.vue';
 
 const props = defineProps({
     toedit: Object,

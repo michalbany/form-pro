@@ -29,7 +29,6 @@ function createHierarchy(pages) {
 watchEffect(() => {
     createHierarchy(props.pages);
 
-    console.log(pageHierarchy.hierarchy);
 });
 
 

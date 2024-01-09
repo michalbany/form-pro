@@ -52,7 +52,7 @@ function handleCreateSubPage(parentPageId) {
 
             pages.value = response.props.pages;
             handleSelect({ type: 'page', data: pageToSelect});
-            pageToSelect.open = true;
+
         },
 
     });
