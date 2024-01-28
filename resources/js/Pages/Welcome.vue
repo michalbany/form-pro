@@ -23,40 +23,40 @@ defineProps({
     <Head title="Welcome" />
 
     <div
-        class="relative min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white"
+        class="relative min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-indigo-500 selection:text-white"
     >
         <div v-if="canLogin" class="p-6 text-end">
             <Link
                 v-if="$page.props.auth.user"
                 :href="route('dashboard')"
-                class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-indigo-500"
                 >Dashboard</Link
             >
 
             <template v-else>
                 <Link
                     :href="route('login')"
-                    class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                    class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-indigo-500"
                     >Log in</Link
                 >
 
                 <Link
                     v-if="canRegister"
                     :href="route('register')"
-                    class="ms-4 py-2 px-3 rounded-md font-semibold bg-red-500 text-white hover:bg-red-400 transition focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                    class="ms-4 py-2 px-3 rounded-md font-semibold bg-indigo-500 text-white hover:bg-indigo-400 transition focus:outline focus:outline-2 focus:rounded-sm focus:outline-indigo-500"
                     >Get Started</Link
                 >
             </template>
         </div>
 
         <div class="max-w-7xl mx-auto p-6 lg:p-8">
-            <h1 class="text-center sm:text-6xl text-5xl font-bold text-red-500">Empower Your <br>Data Collection.</h1>
+            <h1 class="text-center sm:text-6xl text-5xl font-bold text-indigo-500">Empower Your <br>Data Collection.</h1>
             <p class="mt-6 text-xl text-center dark:text-white">Streamline Your Forms with Advanced, User-Friendly Technology.</p>
 
             <div class="flex justify-center mt-8 gap-4">
                 <Link
                     :href="route('register')"
-                    class="inline-flex items-center font-semibold px-4 py-2 border border-transparent text-sm leading-5 cursor-pointer font-medium rounded-md text-white bg-red-500 hover:bg-red-400 focus:outline-none transition ease-in-out duration-150"
+                    class="inline-flex items-center font-semibold px-4 py-2 border border-transparent text-sm leading-5 cursor-pointer font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-400 focus:outline-none transition ease-in-out duration-150"
                     >Find Projects
                     <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -75,14 +75,14 @@ defineProps({
 
                     <Link
                     :href="route('login')"
-                    class="group inline-flex items-center text-sm cursor-pointer font-medium rounded-md text-red-500 hover:text-red-400 focus:outline-none transition ease-in-out duration-150"
+                    class="group inline-flex items-center text-sm cursor-pointer font-medium rounded-md text-indigo-500 hover:text-indigo-400 focus:outline-none transition ease-in-out duration-150"
                     >Read Docs
                     <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke-width="1.5"
-                            class="group-hover:stroke-red-400 stroke-red-500 w-5 h-5 ml-2"
+                            class="group-hover:stroke-indigo-400 stroke-indigo-500 w-5 h-5 ml-2"
                         >
                             <path
                                 stroke-linecap="round"
@@ -104,14 +104,14 @@ defineProps({
                         class="p-6 ring-2 ring-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition cursor-pointer"
                         >
                             <div
-                                class="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full"
+                                class="h-16 w-16 bg-indigo-50 dark:bg-indigo-800/20 flex items-center justify-center rounded-full"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke-width="1.5"
-                                    class="w-7 h-7 fill-red-500"
+                                    class="w-7 h-7 fill-indigo-500"
                                 >
                                     <path
                                         stroke-linecap="round"
@@ -134,14 +134,14 @@ defineProps({
                         class="p-6 ring-2 ring-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition cursor-pointer"
                         >
                             <div
-                                class="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full"
+                                class="h-16 w-16 bg-indigo-50 dark:bg-indigo-800/20 flex items-center justify-center rounded-full"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke-width="1.5"
-                                    class="w-7 h-7 fill-red-500"
+                                    class="w-7 h-7 fill-indigo-500"
                                 >
                                     <path
                                         stroke-linecap="round"
@@ -162,14 +162,14 @@ defineProps({
                         class="p-6 ring-2 ring-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition cursor-pointer"
                         >
                             <div
-                                class="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full"
+                                class="h-16 w-16 bg-indigo-50 dark:bg-indigo-800/20 flex items-center justify-center rounded-full"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke-width="1.5"
-                                    class="w-7 h-7 fill-red-500"
+                                    class="w-7 h-7 fill-indigo-500"
                                 >
                                     <path
                                         stroke-linecap="round"
@@ -191,14 +191,14 @@ defineProps({
                         class="p-6 ring-2 ring-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition cursor-pointer"
                         >
                             <div
-                                class="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full"
+                                class="h-16 w-16 bg-indigo-50 dark:bg-indigo-800/20 flex items-center justify-center rounded-full"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke-width="1.5"
-                                    class="w-7 h-7 fill-red-500"
+                                    class="w-7 h-7 fill-indigo-500"
                                 >
                                     <path
                                         stroke-linecap="round"
