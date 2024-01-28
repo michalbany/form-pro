@@ -29,14 +29,14 @@ function createNewProject() {
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight dark:text-white">Dashboard</h2>
         </template>
 
         <template #controls>
             <div class="flex-shrink-0 pt-4">
                 <button
                     @click.prevent="createNewProject"
-                    class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 cursor-pointer font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none transition ease-in-out duration-150"
+                    class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 cursor-pointer font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-500 focus:outline-none transition ease-in-out duration-150"
                 >
                     Create New Project
             </button>
