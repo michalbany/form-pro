@@ -23,27 +23,27 @@ defineProps({
     <Head title="Welcome" />
 
     <div
-        class="relative min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-emerald-500 selection:text-white"
+        class="relative min-h-screen bg-dots-darker bg-center bg-gray-100 selection:bg-emerald-500 selection:text-white"
     >
         <div v-if="canLogin" class="p-6 text-end">
             <Link
                 v-if="$page.props.auth.user"
                 :href="route('dashboard')"
-                class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-emerald-500"
+                class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-emerald-500"
                 >Dashboard</Link
             >
 
             <template v-else>
                 <Link
                     :href="route('login')"
-                    class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-emerald-500"
+                    class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-emerald-500"
                     >Log in</Link
                 >
 
                 <Link
                     v-if="canRegister"
                     :href="route('register')"
-                    class="ms-4 py-2 px-3 rounded-md font-semibold bg-emerald-500 text-white hover:bg-emerald-400 transition focus:outline focus:outline-2 focus:rounded-sm focus:outline-emerald-500"
+                    class="ms-4 py-2 px-3 rounded-md font-semibold bg-gray-800 text-white hover:bg-gray-700 focus:outline focus:outline-2 focus:rounded-sm focus:outline-emerald-500 transition"
                     >Get Started</Link
                 >
             </template>
@@ -51,12 +51,12 @@ defineProps({
 
         <div class="max-w-7xl mx-auto p-6 lg:p-8">
             <h1 class="text-center sm:text-6xl text-5xl font-bold text-emerald-500">Empower Your <br>Data Collection.</h1>
-            <p class="mt-6 text-xl text-center dark:text-white">Streamline Your Forms with Advanced, User-Friendly Technology.</p>
+            <p class="mt-6 text-xl text-center">Streamline Your Forms with Advanced, User-Friendly Technology.</p>
 
             <div class="flex justify-center mt-8 gap-4">
                 <Link
                     :href="route('register')"
-                    class="inline-flex items-center font-semibold px-4 py-2 border border-transparent text-sm leading-5 cursor-pointer font-medium rounded-md text-white bg-emerald-500 hover:bg-emerald-400 focus:outline-none transition ease-in-out duration-150"
+                    class="inline-flex items-center font-semibold px-4 py-2 border border-transparent text-sm leading-5 cursor-pointer font-medium rounded-md text-white bg-gray-800 hover:bg-gray-800 focus:outline-none transition"
                     >Find Projects
                     <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -96,22 +96,22 @@ defineProps({
             
 
             <div class="mt-16">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 lg:gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
                         
                     
                     
                     <div
-                        class="p-6 ring-2 ring-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition cursor-pointer"
+                        class="group p-6 ring-2 ring-gray-200 bg-gray-100 rounded-lg hover:ring-blue-500 transition cursor-pointer duration-500"
                         >
                             <div
-                                class="h-16 w-16 bg-emerald-50 dark:bg-emerald-800/20 flex items-center justify-center rounded-full"
+                                class="h-16 w-16 bg-blue-50 flex items-center justify-center rounded-full"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke-width="1.5"
-                                    class="w-7 h-7 fill-emerald-500"
+                                    class="w-7 h-7 fill-gray-400 group-hover:fill-blue-500 transition duration-500"
                                 >
                                     <path
                                         stroke-linecap="round"
@@ -121,9 +121,9 @@ defineProps({
                                 </svg>
                             </div>
 
-                            <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Document Clarity</h2>
+                            <h2 class="mt-6 text-xl font-semibold text-gray-900">Document Clarity</h2>
 
-                            <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                            <p class="mt-4 text-gray-500 text-sm leading-relaxed">
                                 Experience enhanced clarity in document management. Organize and access your forms with ease, ensuring every document is just a click away
                             </p>
                         </div>
@@ -131,17 +131,17 @@ defineProps({
 
 
                         <div
-                        class="p-6 ring-2 ring-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition cursor-pointer"
+                        class="group p-6 ring-2 ring-gray-200 bg-gray-100 rounded-lg hover:ring-emerald-500 transition cursor-pointer duration-500"
                         >
                             <div
-                                class="h-16 w-16 bg-emerald-50 dark:bg-emerald-800/20 flex items-center justify-center rounded-full"
+                                class="h-16 w-16 bg-emerald-50 flex items-center justify-center rounded-full"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke-width="1.5"
-                                    class="w-7 h-7 fill-emerald-500"
+                                    class="w-7 h-7 fill-gray-400 group-hover:fill-emerald-500 transition duration-500"
                                 >
                                     <path
                                         stroke-linecap="round"
@@ -151,25 +151,25 @@ defineProps({
                                 </svg>
                             </div>
 
-                            <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Hierarchical Forms</h2>
+                            <h2 class="mt-6 text-xl font-semibold text-gray-900 ">Hierarchical Forms</h2>
 
-                            <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                            <p class="mt-4 text-gray-500 text-sm leading-relaxed">
                                 Build forms with depth using our hierarchical structure. Create sub-forms and nested fields to capture complex data efficiently.                            </p>
                         </div>
 
 
                         <div
-                        class="p-6 ring-2 ring-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition cursor-pointer"
+                        class="group p-6 ring-2 ring-gray-200 bg-gray-100 rounded-lg hover:ring-amber-500 transition cursor-pointer duration-500"
                         >
                             <div
-                                class="h-16 w-16 bg-emerald-50 dark:bg-emerald-800/20 flex items-center justify-center rounded-full"
+                                class="h-16 w-16 bg-amber-50 flex items-center justify-center rounded-full"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke-width="1.5"
-                                    class="w-7 h-7 fill-emerald-500"
+                                    class="w-7 h-7 fill-gray-400 group-hover:fill-amber-500 transition duration-500"
                                 >
                                     <path
                                         stroke-linecap="round"
@@ -178,9 +178,9 @@ defineProps({
                                 </svg>
                             </div>
 
-                            <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Customizable Form Elements</h2>
+                            <h2 class="mt-6 text-xl font-semibold text-gray-900">Customizable Form Elements</h2>
 
-                            <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                            <p class="mt-4 text-gray-500 text-sm leading-relaxed">
                                 Tailor each form element to your needs. Set text lengths, adjust field sizes, and configure options to create the perfect place for your data collection.</p>
                         </div>
 
@@ -188,17 +188,17 @@ defineProps({
 
 
                         <div
-                        class="p-6 ring-2 ring-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition cursor-pointer"
+                        class="group p-6 ring-2 ring-gray-200 bg-gray-100 rounded-lg hover:ring-rose-500 transition cursor-pointer duration-500"
                         >
                             <div
-                                class="h-16 w-16 bg-emerald-50 dark:bg-emerald-800/20 flex items-center justify-center rounded-full"
+                                class="h-16 w-16 bg-rose-50 flex items-center justify-center rounded-full"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke-width="1.5"
-                                    class="w-7 h-7 fill-emerald-500"
+                                    class="w-7 h-7 fill-gray-400 group-hover:fill-rose-500 transition duration-500"
                                 >
                                     <path
                                         stroke-linecap="round"
@@ -209,9 +209,9 @@ defineProps({
 
                             </div>
 
-                            <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Secure Sharing</h2>
+                            <h2 class="mt-6 text-xl font-semibold text-gray-900">Secure Sharing</h2>
 
-                            <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
+                            <p class="mt-4 text-gray-500 text-sm leading-relaxed">
                                 Share your forms securely with generated keys. Provide controlled access to your clients, ensuring data integrity and confidentiality.</p>
                         </div>
                     
@@ -219,13 +219,13 @@ defineProps({
             </div>
 
             <div class="flex justify-center mt-16 px-6 sm:items-center sm:justify-between">
-                <div class="text-center text-sm text-gray-500 dark:text-gray-400 sm:text-start">
+                <div class="text-center text-sm text-gray-500 sm:text-start">
                     <div class="flex items-center gap-4">
                         Autor: Michael Bany
                     </div>
                 </div>
 
-                <div class="ms-4 text-center text-sm text-gray-500 dark:text-gray-400 sm:text-end sm:ms-0">
+                <div class="ms-4 text-center text-sm text-gray-500 sm:text-end sm:ms-0">
                     Laravel v{{ laravelVersion }} (PHP v{{ phpVersion }}) 
                 </div>
             </div>
@@ -241,6 +241,29 @@ defineProps({
     .dark\:bg-dots-lighter {
         background-image: url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.22676 0C1.91374 0 2.45351 0.539773 2.45351 1.22676C2.45351 1.91374 1.91374 2.45351 1.22676 2.45351C0.539773 2.45351 0 1.91374 0 1.22676C0 0.539773 0.539773 0 1.22676 0Z' fill='rgba(255,255,255,0.07)'/%3E%3C/svg%3E");
     }
+}
+
+/* Stylování celého scrollbaru */
+::-webkit-scrollbar {
+    width: 12px;  /* šířka pro vertikální scrollbar */
+    height: 12px; /* výška pro horizontální scrollbar */
+}
+
+/* Stylování dráhy scrollbaru (místa, kde se scrollbar pohybuje) */
+::-webkit-scrollbar-track {
+    background: lightgrey; /* barva pozadí */
+}
+
+/* Stylování pohyblivého prvku scrollbaru (thumb) */
+::-webkit-scrollbar-thumb {
+    background-color: rgb(16 185 129);    /* barva thumb */
+    border-radius: 6px;             /* kulaté rohy */
+    border: 2px solid lightgray;    /* okraj kolem thumb */
+}
+
+/* Stylování thumb při najetí myší */
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(5 150 105);
 }
 
 </style>

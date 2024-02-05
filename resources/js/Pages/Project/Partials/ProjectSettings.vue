@@ -20,7 +20,7 @@ function createPage() {
 
 <template>
   <a href="#" @click.prevent="selectProject"
-    class="relative flex justify-between align-center w-full items-center px-3 py-2 bg-white rounded-md font-bold text-sm text-gray-700 uppercase tracking-widest hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150">
+    class="relative flex justify-between align-center w-full items-center px-3 py-2 bg-white rounded-md font-bold text-sm text-gray-700 uppercase tracking-widest hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150">
     {{ project.name }}
 
     <a href="#" @click.prevent="createPage" class="group transition duration-150 ease-in-out hover:bg-gray-300 rounded-md">

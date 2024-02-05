@@ -131,7 +131,7 @@ function generatedBreadcrumb(item, pages) {
                     <template #breadcrumbs>
                         <div class="flex w-full py-1 p-3 border-gray-200 justify-center">
                             <div class="bg-white px-2 py-1 rounded-md">
-                                <h1 class="text-sm leading-6 text-indigo-600	">
+                                <h1 class="text-sm leading-6 text-emerald-600	">
                                     {{ breadcrumbs }}
                                 </h1>
                             </div>

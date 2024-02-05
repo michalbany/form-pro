@@ -99,7 +99,7 @@ function handleUpdateField(field) {
     </section>
 
     <PrimaryButton
-        class="my-4 bg-indigo-700 hover:bg-indigo-800"
+        class="my-4 bg-emerald-700 hover:bg-emerald-800"
         @click="createField(toedit.data.id)"
         >Add field</PrimaryButton
     >
