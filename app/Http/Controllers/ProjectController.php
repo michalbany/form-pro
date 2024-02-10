@@ -85,7 +85,7 @@ class ProjectController extends Controller
 
         return Inertia::render('Project/ProjectEdit', [
             'project' => $projectWithPages,
-            'pages' => $projectWithPages->pages,
+            'pages' => $projectWithPages->pages, // @remove: Toto je dumplicita, stejné data jsou již v $project
             
         ]);
     }

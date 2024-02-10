@@ -1,5 +1,5 @@
 <script setup>
-import { Head, Link } from '@inertiajs/vue3';
+import { Head, Link } from "@inertiajs/vue3";
 
 defineProps({
     canLogin: {
@@ -23,7 +23,7 @@ defineProps({
     <Head title="Welcome" />
 
     <div
-        class="relative min-h-screen bg-dots-darker bg-center bg-gray-100 selection:bg-emerald-500 selection:text-white"
+        class="min-h-screen bg-dots-darker bg-center bg-gray-100 selection:bg-blue-800 selection:text-red-500"
     >
         <div v-if="canLogin" class="p-6 text-end">
             <Link
@@ -49,69 +49,78 @@ defineProps({
             </template>
         </div>
 
-        <div class="max-w-7xl mx-auto p-6 lg:p-8">
-            <h1 class="text-center sm:text-6xl text-5xl font-bold text-emerald-500">Empower Your <br>Data Collection.</h1>
-            <p class="mt-6 text-xl text-center">Streamline Your Forms with Advanced, User-Friendly Technology.</p>
+        <div
+            class="max-w-7xl mx-auto p-6 lg:p-8 flex flex-col items-center justify-center text-gray-900"
+        >
+            <div
+                class="text-center border rounded-full px-8 py-0.5 mb-2 border-gray-500"
+            >
+                Bring
+                <span class="italic font-serif text-blue-800">sense</span> to
+                your <span class="italic font-serif text-blue-800">forms</span>
+            </div>
+            <h1 class="text-6xl font-bold mb-3 text-center font-serif">
+                Empower Your <br />Data Collection.
+            </h1>
+            <p class="mt-4 text-xl text-center text-gray-600">
+                Optimize and enhance your form processing with cutting-edge,<br />
+                user-friendly technology for smoother operations.
+            </p>
 
-            <div class="flex justify-center mt-8 gap-4">
+            <div class="flex justify-center mt-8 gap-4 pb-6">
                 <Link
                     :href="route('register')"
-                    class="inline-flex items-center font-semibold px-4 py-2 border border-transparent text-sm leading-5 cursor-pointer font-medium rounded-md text-white bg-gray-800 hover:bg-gray-800 focus:outline-none transition"
+                    class="inline-flex items-center font-semibold px-4 py-2 border border-transparent text-sm leading-5 cursor-pointer font-md rounded-md text-white bg-gray-800 hover:bg-gray-700 focus:outline-none transition"
                     >Find Projects
                     <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke-width="1.5"
-                            class="stroke-white w-5 h-5 ml-2"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
-                            />
-                        </svg>
-                    </Link>
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        class="stroke-white w-5 h-5 ml-2"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
+                        />
+                    </svg>
+                </Link>
 
-                    <Link
+                <Link
                     :href="route('login')"
-                    class="group inline-flex items-center text-sm cursor-pointer font-medium rounded-md text-emerald-500 hover:text-emerald-400 focus:outline-none transition ease-in-out duration-150"
+                    class="group inline-flex items-center text-sm cursor-pointer font-medium rounded-md text-blue-800 hover:text-red-500 focus:outline-none transition ease-in-out duration-150"
                     >Read Docs
                     <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke-width="1.5"
-                            class="group-hover:stroke-emerald-400 stroke-emerald-500 w-5 h-5 ml-2"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
-                            />
-                        </svg>
-                    </Link>
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        class="group-hover:stroke-red-500 stroke-blue-800 w-5 h-5 ml-2"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
+                        />
+                    </svg>
+                </Link>
             </div>
 
-            
-
-            <div class="mt-16">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-                        
-                    
-                    
-                    <div
-                        class="group p-6 ring-2 ring-gray-200 bg-gray-100 rounded-lg hover:ring-blue-500 transition cursor-pointer duration-500"
-                        >
+            <div class="container mx-auto px-6 py-16 sm:py-24">
+                <div class="flex flex-wrap -mx-4">
+                    <!-- Feature 1 -->
+                    <div class="group w-full md:w-1/2 px-4 mb-8">
+                        <div class="flex items-start">
                             <div
-                                class="h-16 w-16 bg-blue-50 flex items-center justify-center rounded-full"
+                                class="bg-blue-800 p-2 rounded-lg group-hover:scale-110 group-hover:rotate-6 group-hover:bg-gray-200 ring-2 ring-transparent ring-inset group-hover:ring-blue-800 transition"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke-width="1.5"
-                                    class="w-7 h-7 fill-gray-400 group-hover:fill-blue-500 transition duration-500"
+                                    class="w-7 h-7 fill-white group-hover:fill-red-500"
                                 >
                                     <path
                                         stroke-linecap="round"
@@ -120,28 +129,34 @@ defineProps({
                                     />
                                 </svg>
                             </div>
-
-                            <h2 class="mt-6 text-xl font-semibold text-gray-900">Document Clarity</h2>
-
-                            <p class="mt-4 text-gray-500 text-sm leading-relaxed">
-                                Experience enhanced clarity in document management. Organize and access your forms with ease, ensuring every document is just a click away
-                            </p>
+                            <div class="text-blue-600">
+                                <i class="fas fa-upload fa-2x"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-semibold">
+                                    Document Clarity
+                                </h3>
+                                <p class="mt-1">
+                                    Experience enhanced clarity in document
+                                    management. Organize and access your forms
+                                    with ease, ensuring every document is just a
+                                    click away
+                                </p>
+                            </div>
                         </div>
-
-
-
-                        <div
-                        class="group p-6 ring-2 ring-gray-200 bg-gray-100 rounded-lg hover:ring-emerald-500 transition cursor-pointer duration-500"
-                        >
+                    </div>
+                    <!-- Feature 2 -->
+                    <div class="group w-full md:w-1/2 px-4 mb-8">
+                        <div class="flex items-start">
                             <div
-                                class="h-16 w-16 bg-emerald-50 flex items-center justify-center rounded-full"
+                                class="bg-blue-800 p-2 rounded-lg group-hover:scale-110 group-hover:rotate-6 group-hover:bg-gray-200 ring-2 ring-transparent ring-inset group-hover:ring-blue-800 transition"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke-width="1.5"
-                                    class="w-7 h-7 fill-gray-400 group-hover:fill-emerald-500 transition duration-500"
+                                    class="w-7 h-7 fill-white group-hover:fill-red-500"
                                 >
                                     <path
                                         stroke-linecap="round"
@@ -150,83 +165,179 @@ defineProps({
                                     />
                                 </svg>
                             </div>
-
-                            <h2 class="mt-6 text-xl font-semibold text-gray-900 ">Hierarchical Forms</h2>
-
-                            <p class="mt-4 text-gray-500 text-sm leading-relaxed">
-                                Build forms with depth using our hierarchical structure. Create sub-forms and nested fields to capture complex data efficiently.                            </p>
+                            <div class="text-blue-600">
+                                <i class="fas fa-upload fa-2x"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-semibold">
+                                    Hierarchical Forms
+                                </h3>
+                                <p class="mt-1">
+                                    Build forms with depth using our
+                                    hierarchical structure. Create sub-forms and
+                                    nested fields to capture complex data
+                                    efficiently.
+                                </p>
+                            </div>
                         </div>
-
-
-                        <div
-                        class="group p-6 ring-2 ring-gray-200 bg-gray-100 rounded-lg hover:ring-amber-500 transition cursor-pointer duration-500"
-                        >
+                    </div>
+                    <!-- Feature 3 -->
+                    <div class="group w-full md:w-1/2 px-4 mb-8">
+                        <div class="flex items-start">
                             <div
-                                class="h-16 w-16 bg-amber-50 flex items-center justify-center rounded-full"
+                                class="bg-blue-800 p-2 rounded-lg group-hover:scale-110 group-hover:rotate-6 group-hover:bg-gray-200 ring-2 ring-transparent ring-inset group-hover:ring-blue-800 transition"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke-width="1.5"
-                                    class="w-7 h-7 fill-gray-400 group-hover:fill-amber-500 transition duration-500"
+                                    class="w-7 h-7 fill-white group-hover:fill-red-500"
                                 >
                                     <path
                                         stroke-linecap="round"
                                         stroke-linejoin="round"
-                                        d="M10 3H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zm10 0h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zM10 13H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1zm8 1h-2v2h-2v2h2v2h2v-2h2v-2h-2z"                                    />
+                                        d="M10 3H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zm10 0h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zM10 13H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1zm8 1h-2v2h-2v2h2v2h2v-2h2v-2h-2z"
+                                    />
                                 </svg>
                             </div>
-
-                            <h2 class="mt-6 text-xl font-semibold text-gray-900">Customizable Form Elements</h2>
-
-                            <p class="mt-4 text-gray-500 text-sm leading-relaxed">
-                                Tailor each form element to your needs. Set text lengths, adjust field sizes, and configure options to create the perfect place for your data collection.</p>
+                            <div class="text-blue-600">
+                                <i class="fas fa-upload fa-2x"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-semibold">
+                                    Customizable Form Elements
+                                </h3>
+                                <p class="mt-1">
+                                    Tailor each form element to your needs. Set
+                                    text lengths, adjust field sizes, and
+                                    configure options to create the perfect
+                                    place for your data collection.
+                                </p>
+                            </div>
                         </div>
-
-
-
-
-                        <div
-                        class="group p-6 ring-2 ring-gray-200 bg-gray-100 rounded-lg hover:ring-rose-500 transition cursor-pointer duration-500"
-                        >
+                    </div>
+                    <!-- Feature 4 -->
+                    <div class="group w-full md:w-1/2 px-4 mb-8">
+                        <div class="flex items-start">
                             <div
-                                class="h-16 w-16 bg-rose-50 flex items-center justify-center rounded-full"
+                                class="bg-blue-800 p-2 rounded-lg group-hover:scale-110 group-hover:rotate-6 group-hover:bg-gray-200 ring-2 ring-transparent ring-inset group-hover:ring-blue-800 transition"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke-width="1.5"
-                                    class="w-7 h-7 fill-gray-400 group-hover:fill-rose-500 transition duration-500"
+                                    class="w-7 h-7 fill-white group-hover:fill-red-500"
                                 >
                                     <path
                                         stroke-linecap="round"
                                         stroke-linejoin="round"
-                                        d="M3.433 17.325 3.079 19.8a1 1 0 0 0 1.131 1.131l2.475-.354C7.06 20.524 8 18 8 18s.472.405.665.466c.412.13.813-.274.948-.684L10 16.01s.577.292.786.335c.266.055.524-.109.707-.293a.988.988 0 0 0 .241-.391L12 14.01s.675.187.906.214c.263.03.519-.104.707-.293l1.138-1.137a5.502 5.502 0 0 0 5.581-1.338 5.507 5.507 0 0 0 0-7.778 5.507 5.507 0 0 0-7.778 0 5.5 5.5 0 0 0-1.338 5.581l-7.501 7.5a.994.994 0 0 0-.282.566zM18.504 5.506a2.919 2.919 0 0 1 0 4.122l-4.122-4.122a2.919 2.919 0 0 1 4.122 0z"                                    />
+                                        d="M3.433 17.325 3.079 19.8a1 1 0 0 0 1.131 1.131l2.475-.354C7.06 20.524 8 18 8 18s.472.405.665.466c.412.13.813-.274.948-.684L10 16.01s.577.292.786.335c.266.055.524-.109.707-.293a.988.988 0 0 0 .241-.391L12 14.01s.675.187.906.214c.263.03.519-.104.707-.293l1.138-1.137a5.502 5.502 0 0 0 5.581-1.338 5.507 5.507 0 0 0 0-7.778 5.507 5.507 0 0 0-7.778 0 5.5 5.5 0 0 0-1.338 5.581l-7.501 7.5a.994.994 0 0 0-.282.566zM18.504 5.506a2.919 2.919 0 0 1 0 4.122l-4.122-4.122a2.919 2.919 0 0 1 4.122 0z"
+                                    />
                                 </svg>
-
-
                             </div>
-
-                            <h2 class="mt-6 text-xl font-semibold text-gray-900">Secure Sharing</h2>
-
-                            <p class="mt-4 text-gray-500 text-sm leading-relaxed">
-                                Share your forms securely with generated keys. Provide controlled access to your clients, ensuring data integrity and confidentiality.</p>
+                            <div class="text-blue-600">
+                                <i class="fas fa-upload fa-2x"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-semibold">
+                                    Secure Sharing
+                                </h3>
+                                <p class="mt-1">
+                                    Share your forms securely with generated
+                                    keys. Provide controlled access to your
+                                    clients, ensuring data integrity and
+                                    confidentiality.
+                                </p>
+                            </div>
                         </div>
-                    
+                    </div>
                 </div>
             </div>
 
-            <div class="flex justify-center mt-16 px-6 sm:items-center sm:justify-between">
+            <!--Sponzors-->
+            <div class="pb-24 sm:pb-32">
+                <div
+                    class="mx-auto grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-3"
+                >
+                    <div class="max-w-2xl">
+                        <h2
+                            class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
+                        >
+                            Crafted with Vision
+                        </h2>
+                        <p class="mt-6 leading-8 text-gray-600">
+                            Our journey is created by exceptional developers and
+                            key partners who joined forces to turn our dream
+                            into reality.
+                        </p>
+                    </div>
+                    <ul
+                        role="list"
+                        class="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
+                    >
+                        <li>
+                            <div class="flex items-center gap-x-6">
+                                <img
+                                    class="h-16 w-16 rounded-full"
+                                    src="https://www.marf.cz/media/_thumb/669/michal-nova_200_200_crop.jpeg?v=1706661507"
+                                    alt="Michael Bany"
+                                />
+                                <div>
+                                    <h3
+                                        class="text-base font-semibold leading-7 tracking-tight text-gray-900"
+                                    >
+                                        Michael Bany
+                                    </h3>
+                                    <p
+                                        class="text-sm font-semibold leading-6 text-indigo-600"
+                                    >
+                                        Core Developer
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flex items-center gap-x-6">
+                                <img
+                                    class="h-16 w-16 rounded-full"
+                                    src="https://media.licdn.com/dms/image/C4D0BAQFqmw6flMAsbw/company-logo_200_200/0/1630503595068/marf_sro_logo?e=1715817600&v=beta&t=fyTv587wvaerYbCXZ6llZwR5jEfBt0WT_-mMP3QNnuc"
+                                    alt=""
+                                />
+                                <div>
+                                    <h3
+                                        class="text-base font-semibold leading-7 tracking-tight text-gray-900"
+                                    >
+                                        Marf s.r.o.
+                                    </h3>
+                                    <p
+                                        class="text-sm font-semibold leading-6 text-indigo-600"
+                                    >
+                                        General Partner
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- More people... -->
+                    </ul>
+                </div>
+            </div>
+
+            <div
+                class="flex justify-center mt-16 px-6 sm:items-center sm:justify-between"
+            >
                 <div class="text-center text-sm text-gray-500 sm:text-start">
                     <div class="flex items-center gap-4">
                         Autor: Michael Bany
                     </div>
                 </div>
 
-                <div class="ms-4 text-center text-sm text-gray-500 sm:text-end sm:ms-0">
-                    Laravel v{{ laravelVersion }} (PHP v{{ phpVersion }}) 
+                <div
+                    class="ms-4 text-center text-sm text-gray-500 sm:text-end sm:ms-0"
+                >
+                    Laravel v{{ laravelVersion }} (PHP v{{ phpVersion }})
                 </div>
             </div>
         </div>
@@ -242,28 +353,23 @@ defineProps({
         background-image: url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.22676 0C1.91374 0 2.45351 0.539773 2.45351 1.22676C2.45351 1.91374 1.91374 2.45351 1.22676 2.45351C0.539773 2.45351 0 1.91374 0 1.22676C0 0.539773 0.539773 0 1.22676 0Z' fill='rgba(255,255,255,0.07)'/%3E%3C/svg%3E");
     }
 }
-
-/* Stylování celého scrollbaru */
+/* 
 ::-webkit-scrollbar {
-    width: 12px;  /* šířka pro vertikální scrollbar */
-    height: 12px; /* výška pro horizontální scrollbar */
+    width: 12px;
+    height: 12px;
 }
 
-/* Stylování dráhy scrollbaru (místa, kde se scrollbar pohybuje) */
 ::-webkit-scrollbar-track {
-    background: lightgrey; /* barva pozadí */
+    background: lightgrey; 
 }
 
-/* Stylování pohyblivého prvku scrollbaru (thumb) */
 ::-webkit-scrollbar-thumb {
-    background-color: rgb(16 185 129);    /* barva thumb */
-    border-radius: 6px;             /* kulaté rohy */
-    border: 2px solid lightgray;    /* okraj kolem thumb */
+    background-color: rgb(16 185 129);
+    border-radius: 6px;             
+    border: 2px solid lightgray;   
 }
 
-/* Stylování thumb při najetí myší */
 ::-webkit-scrollbar-thumb:hover {
     background-color: rgb(5 150 105);
-}
-
+} */
 </style>

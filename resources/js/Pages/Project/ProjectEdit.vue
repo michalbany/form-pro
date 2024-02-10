@@ -12,6 +12,8 @@ const toedit = ref({ type: 'project', data: project });
 const pages = ref(usePage().props.pages);
 
 
+console.log(usePage().props);
+
 const breadcrumbs = ref('');
 
 
