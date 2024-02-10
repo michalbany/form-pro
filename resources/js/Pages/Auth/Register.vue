@@ -24,7 +24,7 @@ const submit = () => {
     <GuestLayout>
         <Head title="Register" />
 
-        <div class="bg-white p-12 rounded-lg w-96 h-max">
+        <div class="bg-white shadow-lg p-12 rounded-lg w-96 h-max">
             <h1 class="text-4xl font-serif font-bold mb-5">Register</h1>
 
             <form @submit.prevent="submit">
@@ -98,7 +98,7 @@ const submit = () => {
                 <div class="flex items-center justify-end mt-4">
                     <Link
                         :href="route('login')"
-                        class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
+                        class="underline text-sm text-gray-600 hover:text-gray-900"
                     >
                         Already registered?
                     </Link>

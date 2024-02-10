@@ -21,7 +21,8 @@ const submit = () => {
     <GuestLayout>
         <Head title="Confirm Password" />
 
-        <div class="bg-white p-12 rounded-lg w-96 h-max">
+        <div class="bg-white shadow-lg p-12 rounded-lg w-96 h-max">
+
             <h1 class="text-4xl font-serif font-bold mb-5">Confirm Password</h1>
 
             <div class="mb-4 text-sm text-gray-600">
