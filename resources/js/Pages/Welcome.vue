@@ -22,28 +22,38 @@ defineProps({
 <template>
     <Head title="Welcome" />
 
+    <!--Colors:
+        blue-200: #bfdbfe
+        blue-400: #60a5fa
+        blue-500: #3b82f6
+        blue-700: #1d4ed8
+        blue-800: #1e40af
+        red-300: #fc8181
+    
+    -->
+
     <div
-        class="min-h-screen bg-dots-darker bg-center bg-gray-100 selection:bg-blue-800 selection:text-red-500"
+        class="min-h-screen bg-dots-darker bg-center bg-white selection:bg-blue-200 selection:text-red-300"
     >
         <div v-if="canLogin" class="p-6 text-end">
             <Link
                 v-if="$page.props.auth.user"
                 :href="route('dashboard')"
-                class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-emerald-500"
+                class="font-semibold text-gray-800 hover:text-gray-600 transition"
                 >Dashboard</Link
             >
 
             <template v-else>
                 <Link
                     :href="route('login')"
-                    class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-emerald-500"
+                    class="font-semibold text-gray-800 hover:text-gray-600 transition"
                     >Log in</Link
                 >
 
                 <Link
                     v-if="canRegister"
                     :href="route('register')"
-                    class="ms-4 py-2 px-3 rounded-md font-semibold bg-gray-800 text-white hover:bg-gray-700 focus:outline focus:outline-2 focus:rounded-sm focus:outline-emerald-500 transition"
+                    class="ms-4 py-2 px-3 rounded-md font-semibold bg-blue-700 text-white hover:bg-blue-500 hover:btn-shadow transition focus:bg-blue-700"
                     >Get Started</Link
                 >
             </template>
@@ -53,11 +63,11 @@ defineProps({
             class="max-w-7xl mx-auto p-6 lg:p-8 flex flex-col items-center justify-center text-gray-900"
         >
             <div
-                class="text-center border rounded-full px-8 py-0.5 mb-2 border-gray-500"
+                class="text-center border rounded-full px-5 py-0.5 mb-2 text-blue-700 bg-blue-200"
             >
                 Bring
-                <span class="italic font-serif text-blue-800">sense</span> to
-                your <span class="italic font-serif text-blue-800">forms</span>
+                <span class="text-blue-800">sense</span> to
+                your <span class=" text-blue-800">forms</span>
             </div>
             <h1 class="text-6xl font-bold mb-3 text-center font-serif">
                 Empower Your <br />Data Collection.
@@ -70,7 +80,7 @@ defineProps({
             <div class="flex justify-center mt-8 gap-4 pb-6">
                 <Link
                     :href="route('register')"
-                    class="inline-flex items-center font-semibold px-4 py-2 border border-transparent text-sm leading-5 cursor-pointer font-md rounded-md text-white bg-gray-800 hover:bg-gray-700 focus:outline-none transition"
+                    class="inline-flex items-center font-semibold px-4 py-2 border border-transparent text-sm leading-5 cursor-pointer font-md rounded-md text-white bg-blue-700 hover:bg-blue-500 hover:btn-shadow transition focus:bg-blue-700"
                     >Find Projects
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -89,14 +99,14 @@ defineProps({
 
                 <Link
                     :href="route('login')"
-                    class="group inline-flex items-center text-sm cursor-pointer font-medium rounded-md text-blue-800 hover:text-red-500 focus:outline-none transition ease-in-out duration-150"
+                    class="group inline-flex items-center text-sm cursor-pointer font-medium rounded-md text-gray-800 hover:text-red-300 focus:outline-none transition ease-in-out duration-150"
                     >Read Docs
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke-width="1.5"
-                        class="group-hover:stroke-red-500 stroke-blue-800 w-5 h-5 ml-2"
+                        class="group-hover:stroke-red-300 stroke-gray-800 w-5 h-5 ml-2"
                     >
                         <path
                             stroke-linecap="round"
@@ -113,14 +123,14 @@ defineProps({
                     <div class="group w-full md:w-1/2 px-4 mb-8">
                         <div class="flex items-start">
                             <div
-                                class="bg-blue-800 p-2 rounded-lg group-hover:scale-110 group-hover:rotate-6 group-hover:bg-gray-200 ring-2 ring-transparent ring-inset group-hover:ring-blue-800 transition"
+                                class="bg-blue-500 p-2 rounded-lg group-hover:scale-110 group-hover:rotate-6 group-hover:bg-blue-800 transition"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke-width="1.5"
-                                    class="w-7 h-7 fill-white group-hover:fill-red-500"
+                                    class="w-7 h-7 fill-white group-hover:fill-red-300"
                                 >
                                     <path
                                         stroke-linecap="round"
@@ -149,14 +159,14 @@ defineProps({
                     <div class="group w-full md:w-1/2 px-4 mb-8">
                         <div class="flex items-start">
                             <div
-                                class="bg-blue-800 p-2 rounded-lg group-hover:scale-110 group-hover:rotate-6 group-hover:bg-gray-200 ring-2 ring-transparent ring-inset group-hover:ring-blue-800 transition"
+                                class="bg-blue-500 p-2 rounded-lg group-hover:scale-110 group-hover:rotate-6 group-hover:bg-blue-800 transition"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke-width="1.5"
-                                    class="w-7 h-7 fill-white group-hover:fill-red-500"
+                                    class="w-7 h-7 fill-white group-hover:fill-red-300"
                                 >
                                     <path
                                         stroke-linecap="round"
@@ -185,14 +195,14 @@ defineProps({
                     <div class="group w-full md:w-1/2 px-4 mb-8">
                         <div class="flex items-start">
                             <div
-                                class="bg-blue-800 p-2 rounded-lg group-hover:scale-110 group-hover:rotate-6 group-hover:bg-gray-200 ring-2 ring-transparent ring-inset group-hover:ring-blue-800 transition"
+                                class="bg-blue-500 p-2 rounded-lg group-hover:scale-110 group-hover:rotate-6 group-hover:bg-blue-800 transition"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke-width="1.5"
-                                    class="w-7 h-7 fill-white group-hover:fill-red-500"
+                                    class="w-7 h-7 fill-white group-hover:fill-red-300"
                                 >
                                     <path
                                         stroke-linecap="round"
@@ -221,14 +231,14 @@ defineProps({
                     <div class="group w-full md:w-1/2 px-4 mb-8">
                         <div class="flex items-start">
                             <div
-                                class="bg-blue-800 p-2 rounded-lg group-hover:scale-110 group-hover:rotate-6 group-hover:bg-gray-200 ring-2 ring-transparent ring-inset group-hover:ring-blue-800 transition"
+                                class="bg-blue-500 p-2 rounded-lg group-hover:scale-110 group-hover:rotate-6 group-hover:bg-blue-800 transition"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke-width="1.5"
-                                    class="w-7 h-7 fill-white group-hover:fill-red-500"
+                                    class="w-7 h-7 fill-white group-hover:fill-red-300"
                                 >
                                     <path
                                         stroke-linecap="round"
@@ -291,7 +301,7 @@ defineProps({
                                         Michael Bany
                                     </h3>
                                     <p
-                                        class="text-sm font-semibold leading-6 text-indigo-600"
+                                        class="text-sm font-semibold leading-6 text-blue-400"
                                     >
                                         Core Developer
                                     </p>
@@ -312,7 +322,7 @@ defineProps({
                                         Marf s.r.o.
                                     </h3>
                                     <p
-                                        class="text-sm font-semibold leading-6 text-indigo-600"
+                                        class="text-sm font-semibold leading-6 text-blue-400"
                                     >
                                         General Partner
                                     </p>
@@ -326,11 +336,11 @@ defineProps({
             </div>
 
             <div
-                class="flex justify-center mt-16 px-6 sm:items-center sm:justify-between"
+                class="flex justify-center w-full mt-16 px-6 sm:items-center sm:justify-between"
             >
                 <div class="text-center text-sm text-gray-500 sm:text-start">
                     <div class="flex items-center gap-4">
-                        Autor: Michael Bany
+                        Author: Michael Bany
                     </div>
                 </div>
 
@@ -345,14 +355,19 @@ defineProps({
 </template>
 
 <style>
-.bg-dots-darker {
+/* .bg-dots-darker {
     background-image: url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.22676 0C1.91374 0 2.45351 0.539773 2.45351 1.22676C2.45351 1.91374 1.91374 2.45351 1.22676 2.45351C0.539773 2.45351 0 1.91374 0 1.22676C0 0.539773 0.539773 0 1.22676 0Z' fill='rgba(0,0,0,0.07)'/%3E%3C/svg%3E");
 }
 @media (prefers-color-scheme: dark) {
     .dark\:bg-dots-lighter {
         background-image: url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.22676 0C1.91374 0 2.45351 0.539773 2.45351 1.22676C2.45351 1.91374 1.91374 2.45351 1.22676 2.45351C0.539773 2.45351 0 1.91374 0 1.22676C0 0.539773 0.539773 0 1.22676 0Z' fill='rgba(255,255,255,0.07)'/%3E%3C/svg%3E");
     }
+} */
+
+.hover\:btn-shadow:hover {
+    box-shadow: -4px 4px 0px #fc8181;
 }
+
 /* 
 ::-webkit-scrollbar {
     width: 12px;
