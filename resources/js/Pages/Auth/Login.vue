@@ -32,6 +32,11 @@ const submit = () => {
 <template>
     <GuestLayout>
         <Head title="Log in" />
+        <div class="bg-white p-12 rounded-lg w-96 h-max">
+
+            <h1 class="text-4xl font-serif font-bold mb-5">
+                Log in
+            </h1>
 
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
             {{ status }}
@@ -90,5 +95,6 @@ const submit = () => {
                 </PrimaryButton>
             </div>
         </form>
+        </div>
     </GuestLayout>
 </template>

@@ -1,10 +1,10 @@
 <script setup>
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import { Link } from '@inertiajs/vue3';
+import ApplicationLogo from "@/Components/ApplicationLogo.vue";
+import { Link } from "@inertiajs/vue3";
 </script>
 
 <template>
-    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
+    <!-- <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
         <div>
             <Link href="/">
                 <ApplicationLogo class="w-20 h-20 fill-current text-gray-500" />
@@ -16,5 +16,19 @@ import { Link } from '@inertiajs/vue3';
         >
             <slot />
         </div>
+    </div> -->
+    <div
+        class="min-h-screen items-center justify-items-center grid grid-cols-1 background-pattern"
+    >
+            <div>
+
+                <slot />
+            </div>
     </div>
 </template>
+
+<style>
+.background-pattern {
+    background-image: url('../../images/background.svg');
+}
+</style>

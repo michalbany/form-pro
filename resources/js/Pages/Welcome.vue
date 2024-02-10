@@ -60,7 +60,7 @@ defineProps({
         </div>
 
         <div
-            class="max-w-7xl mx-auto p-6 lg:p-8 flex flex-col items-center justify-center text-gray-900"
+            class="flex flex-col items-center justify-center text-gray-900"
         >
             <div
                 class="text-center border rounded-full px-5 py-0.5 mb-2 text-blue-700 bg-blue-200"
@@ -117,8 +117,9 @@ defineProps({
                 </Link>
             </div>
 
-            <div class="container mx-auto px-6 py-16 sm:py-24">
-                <div class="flex flex-wrap -mx-4">
+            <div class="sm:my-16 py-16 sm:py-24 sm:background-pattern w-full">
+                <div class="flex flex-wrap max-w-7xl container mx-auto px-6 bg-white sm:py-14 rounded-lg">
+                    <!-- max-w-7xl mx-auto p-6 lg:p-8  -->
                     <!-- Feature 1 -->
                     <div class="group w-full md:w-1/2 px-4 mb-8">
                         <div class="flex items-start">
@@ -267,7 +268,7 @@ defineProps({
             </div>
 
             <!--Sponzors-->
-            <div class="pb-24 sm:pb-32">
+            <div class="pb-20 sm:mt-5 sm:pb-24">
                 <div
                     class="mx-auto grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-3"
                 >
@@ -275,7 +276,7 @@ defineProps({
                         <h2
                             class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
                         >
-                            Crafted with Vision
+                        Our Core Team & Partners
                         </h2>
                         <p class="mt-6 leading-8 text-gray-600">
                             Our journey is created by exceptional developers and
@@ -288,9 +289,10 @@ defineProps({
                         class="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
                     >
                         <li>
-                            <div class="flex items-center gap-x-6">
+                            <a href="https://www.instagram.com/michal_bany" target="_blank"
+                                 class="group flex items-center gap-x-6">
                                 <img
-                                    class="h-16 w-16 rounded-full"
+                                    class="group-hover:scale-110 transition h-16 w-16 rounded-full"
                                     src="https://www.marf.cz/media/_thumb/669/michal-nova_200_200_crop.jpeg?v=1706661507"
                                     alt="Michael Bany"
                                 />
@@ -303,15 +305,16 @@ defineProps({
                                     <p
                                         class="text-sm font-semibold leading-6 text-blue-400"
                                     >
-                                        Core Developer
+                                        System Founder
                                     </p>
                                 </div>
-                            </div>
+                            </a>
                         </li>
                         <li>
-                            <div class="flex items-center gap-x-6">
+                            <a href="https://www.marf.cz/" target="_blank" 
+                                 class="group flex items-center gap-x-6">
                                 <img
-                                    class="h-16 w-16 rounded-full"
+                                    class="group-hover:scale-110 transition h-16 w-16 rounded-full"
                                     src="https://media.licdn.com/dms/image/C4D0BAQFqmw6flMAsbw/company-logo_200_200/0/1630503595068/marf_sro_logo?e=1715817600&v=beta&t=fyTv587wvaerYbCXZ6llZwR5jEfBt0WT_-mMP3QNnuc"
                                     alt=""
                                 />
@@ -327,7 +330,7 @@ defineProps({
                                         General Partner
                                     </p>
                                 </div>
-                            </div>
+                            </a>
                         </li>
 
                         <!-- More people... -->
@@ -336,7 +339,7 @@ defineProps({
             </div>
 
             <div
-                class="flex justify-center w-full mt-16 px-6 sm:items-center sm:justify-between"
+                class="flex justify-center w-full mt-10 mb-5 px-6 sm:items-center sm:justify-between"
             >
                 <div class="text-center text-sm text-gray-500 sm:text-start">
                     <div class="flex items-center gap-4">
@@ -366,6 +369,12 @@ defineProps({
 
 .hover\:btn-shadow:hover {
     box-shadow: -4px 4px 0px #fc8181;
+}
+
+.sm\:background-pattern {
+    @media (min-width: 640px) {
+        background-image: url('../../images/background.svg');
+    }
 }
 
 /* 
