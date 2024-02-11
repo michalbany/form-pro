@@ -58,7 +58,6 @@ const closeModal = () => {
 
 <template>
     <div v-if="projects && projects.length" class="mb-6 sm:mx-0 mx-2">
-        <!-- <box-icon name="file-blank" class="fill-blue-800 w-8 h-8"></box-icon> -->
         <h1 class="mb-2 text-3xl font-semibold">🤗Your Projects</h1>
         <p>Dive in and navigate through your creations.</p>
     </div>
@@ -67,7 +66,7 @@ const closeModal = () => {
         class="flex gap-4 flex-col divide-y divide-gray-200"
     >
         <li
-            class="flex justify-between items-center py-3 "
+            class="flex justify-between items-center py-3"
             v-for="project in projects"
             :key="project.id"
         >
@@ -76,13 +75,16 @@ const closeModal = () => {
                     <h4 class="font-semibold text-lg">
                         {{ project.name }}
                     </h4>
-                    <span class="border box-border text-sm bg-green-100 border-green-400 py-0.5 text-green-800 px-2 rounded-lg">
+                    <span
+                        class="border box-border text-sm bg-green-100 border-green-400 py-0.5 text-green-800 px-2 rounded-lg"
+                    >
                         Status
                     </span>
                 </div>
 
                 <p class="text-sm text-gray-600">
-                    {{ new Date(project.created_at).toLocaleDateString() }} · Created by Michael Bany
+                    {{ new Date(project.created_at).toLocaleDateString() }} ·
+                    Created by Michael Bany
                 </p>
             </div>
 
@@ -94,31 +96,47 @@ const closeModal = () => {
                 >
 
                 <Dropdown align="right" width="48">
-                                    <template #trigger>
-                                        <span class="inline-flex rounded-md">
-                                            <button
-                                                type="button"
-                                                class="group inline-flex items-center px-3 py-2 transition"
-                                            >
+                    <template #trigger>
+                        <span class="inline-flex rounded-md">
+                            <button
+                                type="button"
+                                class="group inline-flex items-center px-3 py-2 transition"
+                            >
+                                <box-icon
+                                    name="dots-vertical-rounded"
+                                    class="fill-blue-800 group-hover:fill-gray-400 group-focus:fill-red-200 transition"
+                                ></box-icon>
+                            </button>
+                        </span>
+                    </template>
 
-                                            <box-icon name='dots-vertical-rounded' class="fill-blue-800 group-hover:fill-gray-400 group-focus:fill-red-200 transition"></box-icon>
-                                            </button>
-                                        </span>
-                                    </template>
+                    <template #content>
+                        <DropdownLink
+                            :href="route('projects.edit', project.id)"
+                            class="sm:hidden"
+                        >
+                            <box-icon
+                                name="pencil"
+                                type="solid"
+                                class="h-5 w-5 fill-gray-400 group-hover:fill-blue-500 transition"
+                            ></box-icon>
+                            Edit Project
+                        </DropdownLink>
 
-                                    <template #content>
-                                        <DropdownLink :href="route('projects.edit', project.id)" class="sm:hidden">
-                                            <box-icon name='pencil' type='solid' class="h-5 w-5 fill-gray-400 group-hover:fill-blue-500 transition"></box-icon>
-                                            Edit Project
-                                        </DropdownLink>
-                                        
-                                        <DropdownCall @dropdown-click="() => confirmProjectDeletion(project)">
-                                            <box-icon type='solid' name='trash-alt' class="h-5 w-5 fill-gray-400 group-hover:fill-red-500 transition"></box-icon>
-                                            Delete                                            
-                                        </DropdownCall>
-                                        
-                                    </template>
-                                </Dropdown>
+                        <DropdownCall
+                            @dropdown-click="
+                                () => confirmProjectDeletion(project)
+                            "
+                        >
+                            <box-icon
+                                type="solid"
+                                name="trash-alt"
+                                class="h-5 w-5 fill-gray-400 group-hover:fill-red-300 transition"
+                            ></box-icon>
+                            Delete
+                        </DropdownCall>
+                    </template>
+                </Dropdown>
             </div>
         </li>
     </ul>
@@ -127,21 +145,25 @@ const closeModal = () => {
             😶‍🌫️Whoops! Where are they?
         </h2>
         <p class="mx-6 leading-normal text-center">
-            Your project list is currently as empty as a desert oasis!<br> Why
-            not create your first project now and bring this oasis to life?
+            Your project list is currently as empty as a desert oasis!<br />
+            Why not create your first project now and bring this oasis to life?
         </p>
     </div>
 
     <Modal :show="confirmingProjectDeletion" @close="closeModal">
         <div class="p-6">
-            <h2 class="text-lg font-medium text-gray-900">
-                Are you sure you want to delete this project?
+            <h2 class="text-2xl font-semibold mb-3 text-gray-900">
+                🧐Are We Letting Go of This Project?
             </h2>
-
             <p class="mt-1 text-sm text-gray-600">
-                Once project is deleted, all of its resources and data will be
-                permanently deleted. Please enter your password to confirm you
-                would like to permanently delete this project.
+                Just a heads up! Deleting this project affects not just you, but
+                your entire team.
+            </p>
+            <p class="mt-1 text-sm text-gray-600">
+                Please make sure everyone's on board with this decision, because
+                once it's gone, there's no bringing it back. Consider if
+                <strong class="text-blue-600">archiving</strong> might be the
+                better move.
             </p>
 
             <div class="mt-6">
@@ -169,6 +191,11 @@ const closeModal = () => {
                     :disabled="form.processing"
                     @click="deleteProject"
                 >
+                    <box-icon
+                        type="solid"
+                        name="trash-alt"
+                        class="h-5 w-5 fill-white"
+                    ></box-icon>
                     Delete Project
                 </DangerButton>
             </div>

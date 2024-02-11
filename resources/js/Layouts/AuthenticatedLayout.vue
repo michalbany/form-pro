@@ -79,14 +79,15 @@ const showingNavigationDropdown = ref(false);
                                         <DropdownLink
                                             :href="route('profile.edit')"
                                         >
-                                            Profile
-                                        </DropdownLink>
-                                        <DropdownLink
-                                            :href="route('logout')"
-                                            method="post"
-                                            as="button"
-                                            class="hover:text-red-300"
-                                        >
+                                        <box-icon name='user' class="h-5 w-5 fill-gray-400 group-hover:fill-blue-500 transition"></box-icon>
+                                        Profile
+                                    </DropdownLink>
+                                    <DropdownLink
+                                    :href="route('logout')"
+                                    method="post"
+                                    as="button"
+                                    >
+                                    <box-icon name='power-off' class="h-5 w-5 fill-gray-400 group-hover:fill-red-300 transition"></box-icon>
                                             Log Out
                                         </DropdownLink>
                                     </template>
