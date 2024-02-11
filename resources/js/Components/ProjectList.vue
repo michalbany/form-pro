@@ -60,7 +60,7 @@ const closeModal = () => {
     <div v-if="projects && projects.length" class="mb-6 sm:mx-0 mx-2">
         <!-- <box-icon name="file-blank" class="fill-blue-800 w-8 h-8"></box-icon> -->
         <h1 class="mb-2 text-3xl font-semibold">🤗Your Projects</h1>
-        <p v-if="projects && projects.length">Dive in and navigate through your creations.</p>
+        <p>Dive in and navigate through your creations.</p>
     </div>
     <ul
         v-if="projects && projects.length"
