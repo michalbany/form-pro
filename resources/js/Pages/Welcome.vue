@@ -59,15 +59,13 @@ defineProps({
             </template>
         </div>
 
-        <div
-            class="flex flex-col items-center justify-center text-gray-900"
-        >
+        <div class="flex flex-col items-center justify-center text-gray-900">
             <div
                 class="text-center border rounded-full px-5 py-0.5 mb-2 text-blue-700 bg-blue-200"
             >
                 Bring
-                <span class="text-blue-800">sense</span> to
-                your <span class=" text-blue-800">forms</span>
+                <span class="text-blue-800">sense</span> to your
+                <span class="text-blue-800">forms</span>
             </div>
             <h1 class="text-6xl font-bold mb-3 text-center font-serif">
                 Empower Your <br />Data Collection.
@@ -82,43 +80,27 @@ defineProps({
                     :href="route('register')"
                     class="inline-flex items-center font-semibold px-4 py-2 border border-transparent text-sm leading-5 cursor-pointer font-md rounded-md text-white bg-blue-700 hover:bg-blue-500 hover:btn-shadow transition focus:bg-blue-700"
                     >Find Projects
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        class="stroke-white w-5 h-5 ml-2"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
-                        />
-                    </svg>
+                    <box-icon
+                        name="right-arrow-alt"
+                        class="fill-white w-5 h-5 ml-2"
+                    ></box-icon>
                 </Link>
 
                 <Link
                     :href="route('login')"
                     class="group inline-flex items-center text-sm cursor-pointer font-medium rounded-md text-gray-800 hover:text-red-300 focus:outline-none transition ease-in-out duration-150"
                     >Read Docs
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        class="group-hover:stroke-red-300 stroke-gray-800 w-5 h-5 ml-2"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
-                        />
-                    </svg>
+                    <box-icon
+                        name="right-arrow-alt"
+                        class="group-hover:fill-red-300 fill-gray-800 w-5 h-5 ml-2"
+                    ></box-icon>
                 </Link>
             </div>
 
             <div class="sm:my-16 py-16 sm:py-24 sm:background-pattern w-full">
-                <div class="flex flex-wrap max-w-7xl container mx-auto px-6 bg-white sm:py-14 rounded-lg">
+                <div
+                    class="flex flex-wrap max-w-7xl container mx-auto px-6 bg-white sm:py-14 rounded-lg"
+                >
                     <!-- max-w-7xl mx-auto p-6 lg:p-8  -->
                     <!-- Feature 1 -->
                     <div class="group w-full md:w-1/2 px-4 mb-8">
@@ -276,7 +258,7 @@ defineProps({
                         <h2
                             class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
                         >
-                        Our Core Team & Partners
+                            Our Core Team & Partners
                         </h2>
                         <p class="mt-6 leading-8 text-gray-600">
                             Our journey is created by exceptional developers and
@@ -289,8 +271,11 @@ defineProps({
                         class="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-16 xl:col-span-2"
                     >
                         <li>
-                            <a href="https://www.instagram.com/michal_bany" target="_blank"
-                                 class="group flex items-center gap-x-6">
+                            <a
+                                href="https://www.instagram.com/michal_bany"
+                                target="_blank"
+                                class="group flex items-center gap-x-6"
+                            >
                                 <img
                                     class="group-hover:scale-110 transition h-16 w-16 rounded-full"
                                     src="https://www.marf.cz/media/_thumb/669/michal-nova_200_200_crop.jpeg?v=1706661507"
@@ -311,8 +296,11 @@ defineProps({
                             </a>
                         </li>
                         <li>
-                            <a href="https://www.marf.cz/" target="_blank" 
-                                 class="group flex items-center gap-x-6">
+                            <a
+                                href="https://www.marf.cz/"
+                                target="_blank"
+                                class="group flex items-center gap-x-6"
+                            >
                                 <img
                                     class="group-hover:scale-110 transition h-16 w-16 rounded-full"
                                     src="https://media.licdn.com/dms/image/C4D0BAQFqmw6flMAsbw/company-logo_200_200/0/1630503595068/marf_sro_logo?e=1715817600&v=beta&t=fyTv587wvaerYbCXZ6llZwR5jEfBt0WT_-mMP3QNnuc"
@@ -373,7 +361,7 @@ defineProps({
 
 .sm\:background-pattern {
     @media (min-width: 640px) {
-        background-image: url('../../images/background.svg');
+        background-image: url("../../images/background.svg");
     }
 }
 
