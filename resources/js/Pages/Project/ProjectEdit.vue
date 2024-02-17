@@ -1,7 +1,7 @@
 <script setup>
 import { ref, watchEffect, computed } from 'vue';
 import { usePage, useForm } from '@inertiajs/vue3';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import EditorLayout from '@/Layouts/EditorLayout.vue';
 import PageList from './Partials/PageList.vue';
 import PageDetail from './Partials/PageDetail.vue';
 import ProjectSettings from './Partials/ProjectSettings.vue';
@@ -11,8 +11,6 @@ const { project } = usePage().props;
 const toedit = ref({ type: 'project', data: project });
 const pages = ref(usePage().props.pages);
 
-
-console.log(usePage().props);
 
 const breadcrumbs = ref('');
 
@@ -116,33 +114,44 @@ function generatedBreadcrumb(item, pages) {
 
 <template>
     <Head title="Project Setup" />
-    <AuthenticatedLayout>
-        <div class="flex">
-
-            <aside class="flex flex-col w-80 bg-white rounded-br-md p-2">
-                <ProjectSettings :project="project" @select="handleSelect" @create-page="handleCreatePage"/>
-                <div class="my-4 mt-1 border-gray-200 border-b"></div>
-                
-                <PageList :pages="pages" @select="handleSelect" @create-sub-page="handleCreateSubPage" @delete-page="handleDelete"/>
-            </aside>
+    <EditorLayout>
 
 
-            <aside class="w-4/5">
-                <PageDetail :toedit="toedit">
+        <template #project-settings>
+            <ProjectSettings :project="project" @select="handleSelect" @create-page="handleCreatePage"/>
+        </template>
 
-                    <template #breadcrumbs>
-                        <div class="flex w-full py-1 p-3 border-gray-200 justify-center">
-                            <div class="bg-white px-2 py-1 rounded-md">
-                                <h1 class="text-sm leading-6 text-emerald-600	">
-                                    {{ breadcrumbs }}
-                                </h1>
-                            </div>
+
+        <template #project-list>
+            <PageList :pages="pages" @select="handleSelect" @create-sub-page="handleCreateSubPage" @delete-page="handleDelete"/>
+        </template>
+
+
+        <template #breadcrumbs>
+            
+            {{ breadcrumbs }}
+        </template>
+
+        <template #project-detail>
+            
+            <PageDetail :toedit="toedit">
+    
+                <!-- <template #breadcrumbs>
+                    <div class="flex w-full py-1 p-3 border-gray-200 justify-center">
+                        <div class="bg-white px-2 py-1 rounded-md">
+                            <h1 class="text-sm leading-6 text-emerald-600	">
+                                {{ breadcrumbs }}
+                            </h1>
                         </div>
-                    </template>
+                    </div>
+                </template>
+     -->
+            </PageDetail>
+        </template>
 
-                </PageDetail>
-            </aside>
 
-        </div>
-    </AuthenticatedLayout>
+            <!-- <aside class="w-4/5">
+            </aside> -->
+
+    </EditorLayout>
 </template>

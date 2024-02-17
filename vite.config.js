@@ -11,7 +11,7 @@ export default defineConfig({
         vue({
             template: {
                 compilerOptions: {
-                    isCustomElement: tag => tag.startsWith('box-ico')
+                    isCustomElement: (tag) => tag.includes('box-icon')
                 },
                 transformAssetUrls: {
                     base: null,

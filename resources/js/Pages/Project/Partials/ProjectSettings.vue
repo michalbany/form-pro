@@ -1,34 +1,67 @@
 <script setup>
-import { defineProps, defineEmits } from 'vue';
+import { defineProps, defineEmits, ref } from "vue";
 
 const props = defineProps({
-  project: Object
+    project: Object,
 });
 
-const emit = defineEmits(['select', 'create-page']);
+const hover = ref(false);
+
+const emit = defineEmits(["select", "create-page"]);
 
 // funkce pro výběr projektu
 function selectProject() {
-  emit('select', { type: 'project', data: props.project });
+    emit("select", { type: "project", data: props.project });
 }
 
 // funkce pro vytvoření nové stránky
 function createPage() {
-  emit('create-page', props.project.id);
+    emit("create-page", props.project.id);
+}
+// funkce pro zkrácení textu
+function trimText(text, limit) {
+    if (text.length > limit) {
+        return text.slice(0, limit) + "...";
+    }
+    return text;
 }
 </script>
 
 <template>
-  <a href="#" @click.prevent="selectProject"
-    class="relative flex justify-between align-center w-full items-center px-3 py-2 bg-white rounded-md font-bold text-sm text-gray-700 uppercase tracking-widest hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150">
-    {{ project.name }}
+    <a
+        :title="project.name"
+        @mouseover="hover = true"
+        @mouseleave="hover = false"
+        href="#"
+        @click.prevent="selectProject"
+        class="relative min-h-11 group flex justify-between items-center px-3 py-2 rounded-md font-semibold text-md text-white hover:bg-blue-600 transition"
+    >
+        <div class="flex items-center gap-2 truncate">
+            <box-icon
+                class="fill-white group-hover:fill-blue-200 w-5 h-5 transition flex-shrink-0"
+                type="solid"
+                name="file-blank"
+            ></box-icon>
+            <span class="select-none truncate">
+              {{ project.name }}
+              <!-- {{ hover ? trimText(project.name, 20) : trimText(project.name, 25) }} -->
+            </span>
+        </div>
 
-    <a href="#" @click.prevent="createPage" class="group transition duration-150 ease-in-out hover:bg-gray-300 rounded-md">
-      <svg class=" h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 12H18M12 6v12" />
-      </svg>
-      <p class="absolute pointer-events-none opacity-0 left-full top-1/2 -translate-y-1/2 text-xs text-nowrap normal-case bg-gray-800 text-white p-1 transition duration-150 ease-in-out rounded-md group-hover:opacity-100">Add page inside</p>
+        <a
+            href="#"
+            @click.prevent="createPage"
+            class="group-hover:flex items-center hidden justify-center p-1 group/plus transition hover:bg-red-300 rounded-md"
+        >
+            <box-icon
+                class="h-5 w-5 fill-white"
+                name="message-alt-add"
+            ></box-icon>
+            <p
+                class="absolute pointer-events-none opacity-0 left-full top-1/2 -translate-y-1/2 text-xs text-nowrap normal-case bg-gray-800 text-white p-1 transition duration-150 ease-in-out rounded-md group-hover/plus:opacity-100"
+            >
+                Add page inside
+            </p>
+        </a>
     </a>
-
-  </a>
 </template>

@@ -58,7 +58,7 @@ function saveChanges() {
 </script>
 
 <template>
-    <slot name="breadcrumbs"/>
+    <!-- <slot name="breadcrumbs"/> -->
 
     <main class="px-24">
 
