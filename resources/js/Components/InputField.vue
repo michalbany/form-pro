@@ -85,7 +85,7 @@ const contentLengthDifference = computed(() => {
 
             <textarea
                 id="content"
-                class="mt-1 border-none focus:outline-none focus:border-none focus:ring focus:ring-2 focus:ring-gray-300 rounded-md font-sans resize-none block w-full text-xl"
+                class="mt-1 border-none focus:outline-none focus:border-none focus:ring-2 focus:ring-gray-300 rounded-md font-sans resize-none block w-full text-xl"
                 rows="4"
                 placeholder="Enter TextField Content"
                 v-model="form.content"

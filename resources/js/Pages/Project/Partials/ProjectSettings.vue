@@ -1,11 +1,11 @@
 <script setup>
-import { defineProps, defineEmits, ref } from "vue";
+import { defineProps, defineEmits } from "vue";
 
 const props = defineProps({
     project: Object,
-});
+    selected: Number,
+  });
 
-const hover = ref(false);
 
 const emit = defineEmits(["select", "create-page"]);
 
@@ -18,13 +18,7 @@ function selectProject() {
 function createPage() {
     emit("create-page", props.project.id);
 }
-// funkce pro zkrácení textu
-function trimText(text, limit) {
-    if (text.length > limit) {
-        return text.slice(0, limit) + "...";
-    }
-    return text;
-}
+
 </script>
 
 <template>
@@ -34,6 +28,9 @@ function trimText(text, limit) {
         @mouseleave="hover = false"
         href="#"
         @click.prevent="selectProject"
+        :class="{
+            'bg-blue-600': selected === project.id,
+        }"
         class="relative min-h-11 group flex justify-between items-center px-3 py-2 rounded-md font-semibold text-md text-white hover:bg-blue-600 transition"
     >
         <div class="flex items-center gap-2 truncate">
@@ -51,7 +48,7 @@ function trimText(text, limit) {
         <a
             href="#"
             @click.prevent="createPage"
-            class="group-hover:flex items-center hidden justify-center p-1 group/plus transition hover:bg-red-300 rounded-md"
+            class="ml-1 group-hover:flex items-center hidden justify-center p-1 group/plus transition hover:bg-red-300 rounded-md"
         >
             <box-icon
                 class="h-5 w-5 fill-white"

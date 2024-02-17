@@ -5,6 +5,7 @@ import Page from "./Page.vue";
 
 const props = defineProps({
     pages: Array,
+    selected: Number,
 });
 
 const emit = defineEmits(["select", "create-sub-page", "delete-page"]);
@@ -51,14 +52,17 @@ function deletePage(page) {
             
             <Page
                 :page="page"
+                :selected="selected"
                 @select="selectPage"
                 @create-sub-page="createSubPage"
                 @delete-page="deletePage"
             />
             
             <PageSubpage
+                class="mt-0.5"
                 v-if="page.subpages.length > 0"
                 :subpages="page"
+                :selected="selected"
                 @select="selectPage"
                 @create-sub-page="createSubPage"
                 @delete-page="deletePage"

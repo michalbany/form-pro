@@ -5,6 +5,7 @@ import DropdownCall from "@/Components/DropdownCall.vue";
 
 const props = defineProps({
     page: Object,
+    selected: Number,
 });
 
 const emit = defineEmits(["select", "create-sub-page", "delete-page"]);
@@ -25,9 +26,13 @@ function deletePage(page) {
 <template>
     <a
         class="cursor-pointer relative group flex justify-between items-center px-3 py-1 min-h-8 rounded-md font-semibold text-md text-white hover:bg-blue-600 transition"
+        :class="{
+            'bg-blue-600': selected === page.id,
+        }"
         :title="page.name"
         @mouseover="hover = true"
         @mouseleave="hover = false"
+       
     >
         <div class="flex items-center gap-1 flex-grow truncate">
             <a
@@ -46,14 +51,14 @@ function deletePage(page) {
             </a>
 
             <span
-                class="text-sm select-none truncate"
+                class="text-sm flex-grow select-none truncate"
                 @click.prevent="selectPage(page)"
             >
                 {{ page.name }}
             </span>
         </div>
 
-        <div class="hidden group-hover:flex gap-1 items-center">
+        <div class="ml-1 hidden group-hover:flex gap-1 items-center">
             <Dropdown align="left" width="48">
                 <template #trigger>
                     <button

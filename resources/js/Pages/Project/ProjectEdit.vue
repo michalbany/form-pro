@@ -15,6 +15,8 @@ const pages = ref(usePage().props.pages);
 const breadcrumbs = ref('');
 
 
+const selected = ref(project.id);
+
 const subPageform = useForm({
     name: 'Untitled',
     projectId: project.id,
@@ -75,7 +77,10 @@ function handleCreatePage(projectId) {
 
 function handleSelect(item) {
     toedit.value = item;
+    selected.value = item.data.id;
 }
+
+
 
 watchEffect(() => {
     breadcrumbs.value = generatedBreadcrumb(toedit.value, pages.value);
@@ -118,12 +123,12 @@ function generatedBreadcrumb(item, pages) {
 
 
         <template #project-settings>
-            <ProjectSettings :project="project" @select="handleSelect" @create-page="handleCreatePage"/>
+            <ProjectSettings :selected="selected" :project="project" @select="handleSelect" @create-page="handleCreatePage"/>
         </template>
 
 
         <template #project-list>
-            <PageList :pages="pages" @select="handleSelect" @create-sub-page="handleCreateSubPage" @delete-page="handleDelete"/>
+            <PageList :selected="selected" :pages="pages" @select="handleSelect" @create-sub-page="handleCreateSubPage" @delete-page="handleDelete"/>
         </template>
 
 
