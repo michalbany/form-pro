@@ -365,8 +365,8 @@ defineProps({
     }
 }
 
-/* 
-::-webkit-scrollbar {
+
+/* ::-webkit-scrollbar {
     width: 12px;
     height: 12px;
 }

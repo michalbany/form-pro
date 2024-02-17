@@ -24,8 +24,6 @@ function createPage() {
 <template>
     <a
         :title="project.name"
-        @mouseover="hover = true"
-        @mouseleave="hover = false"
         href="#"
         @click.prevent="selectProject"
         :class="{

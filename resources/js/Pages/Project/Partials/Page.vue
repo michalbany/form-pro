@@ -27,11 +27,9 @@ function deletePage(page) {
     <a
         class="cursor-pointer relative group flex justify-between items-center px-3 py-1 min-h-8 rounded-md font-semibold text-md text-white hover:bg-blue-600 transition"
         :class="{
-            'bg-blue-600': selected === page.id,
+            'selected-item': selected === page.id,
         }"
         :title="page.name"
-        @mouseover="hover = true"
-        @mouseleave="hover = false"
        
     >
         <div class="flex items-center gap-1 flex-grow truncate">
@@ -59,31 +57,33 @@ function deletePage(page) {
         </div>
 
         <div class="ml-1 hidden group-hover:flex gap-1 items-center">
-            <Dropdown align="left" width="48">
-                <template #trigger>
-                    <button
+            
+
+                <Dropdown align="left" width="48">
+                    <template #trigger>
+                        <button
                         type="button"
                         class="group/arrow flex items-center justify-center p-0.5 transition hover:bg-blue-500 rounded-md"
-                    >
+                        >
                         <box-icon
-                            name="dots-vertical-rounded"
-                            class="h-5 w-5 fill-blue-300 group-hover/arrow:fill-white"
+                        name="dots-vertical-rounded"
+                        class="h-5 w-5 fill-blue-300 group-hover/arrow:fill-white"
                         ></box-icon>
                     </button>
                 </template>
-
+                
                 <template #content>
                     <DropdownCall @dropdown-click="deletePage(page)">
                         <box-icon
-                            type="solid"
-                            name="trash-alt"
-                            class="h-5 w-5 fill-gray-400 group-hover:fill-red-300 transition"
+                        type="solid"
+                        name="trash-alt"
+                        class="h-5 w-5 fill-gray-400 group-hover:fill-red-300 transition"
                         ></box-icon>
                         Delete
                     </DropdownCall>
                 </template>
             </Dropdown>
-
+            
             <a
                 @click.prevent="createSubPage(page.id)"
                 class="flex items-center justify-center p-0.5 group/plus transition hover:bg-red-300 rounded-md"
@@ -101,3 +101,10 @@ function deletePage(page) {
         </div>
     </a>
 </template>
+
+<style>
+.selected-item {
+    background-color: #376fe9;
+}
+
+</style>

@@ -49,7 +49,6 @@ function deletePage(page) {
 <template>
     <ul class="flex flex-col gap-0.5">
         <li v-for="page in pageHierarchy.hierarchy" :key="page.id">
-            
             <Page
                 :page="page"
                 :selected="selected"
@@ -57,7 +56,7 @@ function deletePage(page) {
                 @create-sub-page="createSubPage"
                 @delete-page="deletePage"
             />
-            
+
             <PageSubpage
                 class="mt-0.5"
                 v-if="page.subpages.length > 0"

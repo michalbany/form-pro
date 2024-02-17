@@ -127,8 +127,8 @@ function generatedBreadcrumb(item, pages) {
         </template>
 
 
-        <template #project-list>
-            <PageList :selected="selected" :pages="pages" @select="handleSelect" @create-sub-page="handleCreateSubPage" @delete-page="handleDelete"/>
+        <template #page-list>
+            <PageList :selected="selected" :pages="pages" @select="handleSelect" @create-sub-page="handleCreateSubPage" @delete-page="handleDelete" />
         </template>
 
 

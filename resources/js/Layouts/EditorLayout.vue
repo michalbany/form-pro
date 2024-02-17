@@ -14,22 +14,33 @@ const showingNavigationDropdown = ref(false);
 <template>
     <div class="flex selection:bg-blue-200 selection:text-red-300">
         <aside
-            class="flex flex-col w-80 bg-blue-500 border-r p-2 h-screen sticky top-0 left-0"
+            class="flex flex-col w-80 bg-blue-500 border-r p-2 min-h-screen h-full sticky top-0 left-0"
         >
-        <div class="shrink-0 m-2 ml-4 mb-10 flex items-center">
-            <Link :href="route('dashboard')">
-                <ApplicationLogo
-                color="white"
-                class="block h-9 w-auto fill-current text-gray-800"
-                />
-            </Link>
-        </div>
-
+            <div class="shrink-0 m-2 ml-4 mb-10 flex items-center">
+                <Link :href="route('dashboard')">
+                    <ApplicationLogo
+                        color="white"
+                        class="block h-9 w-auto fill-current text-gray-800"
+                    />
+                </Link>
+            </div>
             <p class="ml-2 my-2 text-xs text-blue-200 font-bold">Project:</p>
             <slot name="project-settings" />
             <p class="text-xs ml-2 my-2 text-blue-200 font-bold">Pages:</p>
-            <slot name="project-list" />
+
+            <div class="max-h-96 overflow-y-auto overflow-x-hidden">
+                <slot name="page-list" />
+            </div>
             <p class="text-xs ml-2 my-2 text-blue-200 font-bold">App Menu</p>
+            <p class="text-xs ml-2 my-2 text-blue-200 font-bold">App Menu</p>
+            <p class="text-xs ml-2 my-2 text-blue-200 font-bold">App Menu</p>
+            <p class="text-xs ml-2 my-2 text-blue-200 font-bold">App Menu</p>
+            <p class="text-xs ml-2 my-2 text-blue-200 font-bold">App Menu</p>
+            <p class="text-xs ml-2 my-2 text-blue-200 font-bold">App Menu</p>
+            <p class="text-xs ml-2 my-2 text-blue-200 font-bold">App Menu</p>
+            <p class="text-xs ml-2 my-2 text-blue-200 font-bold">App Menu</p>
+            <p class="text-xs ml-2 my-2 text-blue-200 font-bold">App Menu</p>
+
         </aside>
 
         <main class="flex-grow">
@@ -235,5 +246,22 @@ const showingNavigationDropdown = ref(false);
     background-size: 50%;
     background-position: center;
     z-index: -1;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #60a5fa;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #1d4ed8;
 }
 </style>
