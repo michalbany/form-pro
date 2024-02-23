@@ -1,13 +1,15 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
 use Inertia\Inertia;
 
-use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\TextFieldController;
-use App\Http\Controllers\PageController;
+use App\Http\Controllers\{
+    ProfileController,
+    ProjectController,
+    TextFieldController,
+    PageController
+};
 
 /*
 |--------------------------------------------------------------------------
@@ -29,20 +31,61 @@ Route::get('/', function () {
     ]);
 });
 
-// přesun na dashboard
+// FINE přesun na dashboard
 Route::get('/dashboard', [ProjectController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-// vytvoření nového projektu
+// FINE  vytvoření nového projektu 
 Route::post('/projects', [ProjectController::class, 'create'])
     ->middleware(['auth', 'verified'])
     ->name('projects.create');
 
-// smazání projektu
+// FINE  smazání projektu
 Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])
     ->middleware(['auth', 'verified'])
     ->name('projects.destroy');
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+
+// @todo: Optimalizace route pro oddělení stánky a projektu
+
+// @note: Routes pro Editor:
+
+// -------------------------- //
+
+// Pro zobrazení editoru a načtení základních dat
+Route::get('/project/{project}/edit', [ProjectController::class, 'show'])
+    ->middleware(['auth', 'verified'])
+    ->name('project.show');
+
+
+// Zobrazení jednotlivé stránky projektu
+Route::get('/project/{project}/{page}/edit', [PageController::class, 'show'])
+    ->middleware(['auth', 'verified'])
+    ->name('page.show');
+
+
+
+// // SLUG ROUTES
+// Route::get('/project/{project:slug}/edit', [ProjectController::class, 'show'])
+//     ->middleware(['auth', 'verified'])
+//     ->name('project.show');
+
+
+// // Zobrazení jednotlivé stránky projektu
+// Route::get('/project/{page:slug}/edit', [PageController::class, 'show'])
+//     ->middleware(['auth', 'verified'])
+//     ->name('page.show');
+
+// -------------------------- //
+
 
 // Přesun na aktualizaci/vytvoření projektu
 Route::get('/projects/{project}/edit', [ProjectController::class, 'edit'])
@@ -70,6 +113,9 @@ Route::delete('/pages/{page}', [PageController::class, 'destroy'])
     ->name('pages.destroy');
 
 
+
+// @todo: Textové pole a obsah stránky ještě budeme řešit
+
 // @note: přidání textového pole
 Route::post('textfields', [TextFieldController::class, 'create'])
     ->middleware(['auth', 'verified'])
@@ -85,10 +131,6 @@ Route::put('textfields/{id}', [TextFieldController::class, 'update'])
     ->middleware(['auth', 'verified'])
     ->name('fields.update');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+
 
 require __DIR__.'/auth.php';

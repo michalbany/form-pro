@@ -10,7 +10,20 @@ use Illuminate\Support\Facades\Redirect;
 
 class PageController extends Controller
 {
-
+    /**
+     * Vracíme konkrétní stránku s jejím obsahem
+     * @return page + textFields
+     */
+    public function show(Project $project, Page $page) {
+        
+        return Inertia::render('Page', [
+            'page' => $page,
+            'textFields' => $page->textFields,
+        ]);
+    }
+    
+    
+    
     public function update(Request $request, Page $page)
     {
         $validatedData = $request->validate([

@@ -32,14 +32,14 @@ const showingNavigationDropdown = ref(false);
                 <slot name="page-list" />
             </div>
             <p class="text-xs ml-2 my-2 text-blue-200 font-bold">App Menu</p>
+            <!-- <p class="text-xs ml-2 my-2 text-blue-200 font-bold">App Menu</p>
             <p class="text-xs ml-2 my-2 text-blue-200 font-bold">App Menu</p>
             <p class="text-xs ml-2 my-2 text-blue-200 font-bold">App Menu</p>
             <p class="text-xs ml-2 my-2 text-blue-200 font-bold">App Menu</p>
             <p class="text-xs ml-2 my-2 text-blue-200 font-bold">App Menu</p>
             <p class="text-xs ml-2 my-2 text-blue-200 font-bold">App Menu</p>
             <p class="text-xs ml-2 my-2 text-blue-200 font-bold">App Menu</p>
-            <p class="text-xs ml-2 my-2 text-blue-200 font-bold">App Menu</p>
-            <p class="text-xs ml-2 my-2 text-blue-200 font-bold">App Menu</p>
+            <p class="text-xs ml-2 my-2 text-blue-200 font-bold">App Menu</p> -->
 
         </aside>
 
