@@ -16,7 +16,9 @@ class PageController extends Controller
      */
     public function show(Project $project, Page $page) {
         
-        return Inertia::render('Page', [
+        dd($page);
+
+        return Inertia::render('Editor/MainArea/PageEditor', [ // change to reactive
             'page' => $page,
             'textFields' => $page->textFields,
         ]);

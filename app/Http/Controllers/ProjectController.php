@@ -58,10 +58,12 @@ class ProjectController extends Controller
         $projectData = [
             'id' => $project->id,
             'name' => $project->name,
+            'created_at' => $project->created_at,
+            'updated_at' => $project->updated_at,
             'pages' => $pagesHierarchy,
         ];
         // Vrácení dat do Inertia view
-        return Inertia::render('Project/Editor', $projectData);
+        return Inertia::render('Editor/EditorGlobalSettings', $projectData);
     }
 
 

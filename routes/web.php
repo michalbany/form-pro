@@ -63,15 +63,24 @@ Route::middleware('auth')->group(function () {
 // Pro zobrazení editoru a načtení základních dat
 Route::get('/project/{project}/edit', [ProjectController::class, 'show'])
     ->middleware(['auth', 'verified'])
-    ->name('project.show');
+    ->name('edit.project.show');
 
 
 // Zobrazení jednotlivé stránky projektu
 Route::get('/project/{project}/{page}/edit', [PageController::class, 'show'])
     ->middleware(['auth', 'verified'])
-    ->name('page.show');
+    ->name('edit.page.show');
+    
+    
+Route::get('/project/{project}/view', [ProjectController::class, 'show'])
+    ->middleware(['auth', 'verified'])
+    ->name('view.project.show');
 
 
+// Zobrazení jednotlivé stránky projektu
+Route::get('/project/{project}/{page}/view', [PageController::class, 'show'])
+    ->middleware(['auth', 'verified'])
+    ->name('view.page.show');
 
 // // SLUG ROUTES
 // Route::get('/project/{project:slug}/edit', [ProjectController::class, 'show'])
