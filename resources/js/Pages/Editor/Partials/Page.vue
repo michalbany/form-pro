@@ -1,5 +1,5 @@
 <script setup>
-import { defineEmits, defineProps, ref } from "vue";
+import { defineEmits, defineProps, ref, watchEffect } from "vue";
 import Dropdown from "@/Components/Dropdown.vue";
 import DropdownCall from "@/Components/DropdownCall.vue";
 import { Link } from "@inertiajs/vue3";
@@ -13,6 +13,7 @@ const props = defineProps({
     page: Object,
 });
 
+
 </script>
 
 <template>
@@ -24,7 +25,7 @@ const props = defineProps({
     >
         <div class="flex items-center gap-1 flex-grow truncate">
             <a
-                @click.prevent="page.open = !page.open"
+                @click.prevent="store.togglePageOpen(page.id)"
                 v-if="Object.keys(page.children).length > 0"
                 class="group/arrow flex items-center justify-center p-0.5 transition hover:bg-blue-500 rounded-md"
             >

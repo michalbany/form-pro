@@ -1,12 +1,15 @@
 <script setup>
-import { defineProps, defineEmits } from "vue";
+import { defineProps, defineEmits, computed } from "vue";
 import Page from "./Page.vue";
+import { useProjectStore } from "@/Store/projectStore";
+
+const store = useProjectStore();
 
 const props = defineProps({
     children: Object,
+    open: Boolean,
 });
 
-const open = true; // zkus komentovat a odkomentovat a uvidíš chybu v paddingu, kterou si řešil nedávno
 
 </script>
 
@@ -19,11 +22,14 @@ const open = true; // zkus komentovat a odkomentovat a uvidíš chybu v paddingu
             
             <Page
                 :page="page"
+                :key="page.id"
+                @toggle-open="store.togglePageOpen(page.id)"
             />
 
             <PageSubpage
                 class="mt-0.5"
                 :children="page.children"
+                :open="page.open"
                 v-if="Object.keys(page.children).length > 0"
             />
         </li>

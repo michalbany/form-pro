@@ -47,6 +47,7 @@ class ProjectController extends Controller
                     'name' => $page->name,
                     'parent_id' => $page->parent_id,
                     'children' => $children,
+                    'open' => false,
                 ];
             });
         };

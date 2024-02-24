@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watchEffect, computed } from 'vue';
+import { ref, watchEffect, computed, onMounted } from 'vue';
 import { usePage, useForm } from '@inertiajs/vue3';
 import EditorLayout from '@/Layouts/EditorLayout.vue';
 import PageList from './Partials/PageList.vue';
@@ -18,13 +18,11 @@ const project = ref({ id, name, created_at, updated_at });
 
 watchEffect(() => {
     store.loadPages(pages);
-});
-
-watchEffect(() => {
     store.loadProjectData(project.value);
+    // store.resetStore(id); // Resetujeme uložiště při změně projektu -- tedy jiné ID projektu --- Možná to není potřeba protože watchEffect se spustí jen když se změní ID projektu
 });
 
-
+// console.log('store:', store.pages);
 // Co se týče stavu editoru, tak zjištění o jaký stav jde by mělo být už dřív řešené. Buď na dashvoard nebo na backendu
 // že pokud nemáš práva na editaci, tak se ti nezobrazí tlačítko editace. A proběhne přesměrování z edit na view
 watchEffect(() => {

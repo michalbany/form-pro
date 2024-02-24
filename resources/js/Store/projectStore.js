@@ -7,7 +7,7 @@ import { usePage } from '@inertiajs/vue3'
  * a všechny informace, které jsou důležité. Bude se zde udržovat stav projektu, tedy jeho aktuální úpravy.
  * A po Ctrl+S se to pošle na server nebo po uplynutí nějakého času nebo po provedení určitého počtu změn.
  * Tyto data jako lokální uložiště pro všechny komponenty, které s tímto projektem pracují. A musí být vždy aktuální tedy reaktivní.
- * 
+ *
  * můžeme data ze serveru přidat i sem načítání i posílání dat na server
  */
 
@@ -37,7 +37,19 @@ export const useProjectStore = defineStore('projectStore', {
         },
         setMode(mode) {
             this.mode = mode;
-        }
+        },
+        togglePageOpen(pageId) {
+            const stack = [...this.pages];
+            while (stack.length > 0) {
+                const page = stack.pop();
+                if (page.id === pageId) {
+                    page.open = !page.open;
+                }
+                if (page.children && Object.keys(page.children).length > 0) {
+                    stack.push(...Object.values(page.children));
+                }
+            }
+        },
     }
 
 
@@ -72,7 +84,7 @@ export const useProjectStore = defineStore('projectStore', {
 //         // Hledání stránky v store
 //         findPageInStore(id) {
 //             // pomocí rekurzivní funkce najdeme stránku podle id
-//             const findPage = (pages, id) => pages.find(page => page.id === id) || 
+//             const findPage = (pages, id) => pages.find(page => page.id === id) ||
 //                 pages.reduce((acc, page) => acc || findPage(page.subpages || [], id), null);
 
 //             return this.project ? findPage(this.project.pages, id) : null;

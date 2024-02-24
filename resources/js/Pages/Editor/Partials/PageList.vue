@@ -7,10 +7,6 @@ import { useProjectStore } from "@/Store/projectStore";
 const store = useProjectStore();
 const pages = reactive(store.pages);
 
-
-
-
-
 </script>
 
 <template>
@@ -18,11 +14,13 @@ const pages = reactive(store.pages);
         <li v-for="page in pages" :key="page.id">
             <Page
                 :page="page"
+                :key="page.id"
             />
 
             <PageSubpage
                 class="mt-0.5"
                 v-if="Object.keys(page.children).length > 0"
+                :open="page.open"
                 :children="page.children"
             />
         </li>

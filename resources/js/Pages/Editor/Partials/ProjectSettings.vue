@@ -37,7 +37,6 @@ const project = ref(store.projectData);
             ></box-icon>
             <span class="select-none truncate">
               {{ project.name }}
-              <!-- {{ hover ? trimText(project.name, 20) : trimText(project.name, 25) }} -->
             </span>
         </div>
 
