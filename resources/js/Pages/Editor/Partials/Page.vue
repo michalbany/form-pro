@@ -1,5 +1,5 @@
 <script setup>
-import { defineEmits, defineProps, ref, watchEffect } from "vue";
+import { defineProps, ref } from "vue";
 import Dropdown from "@/Components/Dropdown.vue";
 import DropdownCall from "@/Components/DropdownCall.vue";
 import { Link } from "@inertiajs/vue3";

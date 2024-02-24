@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, defineEmits, computed } from "vue";
+import { defineProps } from "vue";
 import Page from "./Page.vue";
 import { useProjectStore } from "@/Store/projectStore";
 

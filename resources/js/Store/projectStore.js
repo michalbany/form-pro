@@ -38,17 +38,15 @@ export const useProjectStore = defineStore('projectStore', {
         setMode(mode) {
             this.mode = mode;
         },
-        togglePageOpen(pageId) {
-            const stack = [...this.pages];
-            while (stack.length > 0) {
-                const page = stack.pop();
+        togglePageOpen(pageId, pages = this.pages) {
+            Object.values(pages).forEach(page => {
                 if (page.id === pageId) {
                     page.open = !page.open;
                 }
                 if (page.children && Object.keys(page.children).length > 0) {
-                    stack.push(...Object.values(page.children));
+                    this.togglePageOpen(pageId, page.children);
                 }
-            }
+            });
         },
     }
 

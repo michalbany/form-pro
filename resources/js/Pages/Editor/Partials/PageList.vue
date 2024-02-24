@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, defineEmits, reactive, watchEffect, computed } from "vue";
+import { reactive } from "vue";
 import PageSubpage from "./PageSubpage.vue";
 import Page from "./Page.vue";
 import { useProjectStore } from "@/Store/projectStore";

@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, defineEmits, ref } from "vue";
+import { ref } from "vue";
 import { Link } from "@inertiajs/vue3";
 import { useProjectStore } from "@/Store/projectStore";
 
