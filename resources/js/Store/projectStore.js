@@ -18,14 +18,13 @@ import { usePage } from '@inertiajs/vue3'
 
 export const useProjectStore = defineStore('projectStore', {
     state: () => ({
-        projectData: null, // add later
+        projectData: null,
         mode: true,
         pages: [],
     }),
     actions: {
         loadProjectData(projectData) {
             this.projectData = projectData;
-            //  upravíme později
         },
         loadPages(pages) {
             this.pages = pages;

@@ -3,7 +3,6 @@ import { ref, watchEffect, computed } from 'vue';
 import { usePage, useForm } from '@inertiajs/vue3';
 import EditorLayout from '@/Layouts/EditorLayout.vue';
 import PageList from './Partials/PageList.vue';
-import PageDetail from './Partials/PageDetail.vue';
 import ProjectSettings from './Partials/ProjectSettings.vue';
 import { Head } from '@inertiajs/vue3';
 import { useProjectStore } from "@/Store/projectStore";
@@ -25,6 +24,9 @@ watchEffect(() => {
     store.loadProjectData(project.value);
 });
 
+
+// Co se týče stavu editoru, tak zjištění o jaký stav jde by mělo být už dřív řešené. Buď na dashvoard nebo na backendu
+// že pokud nemáš práva na editaci, tak se ti nezobrazí tlačítko editace. A proběhne přesměrování z edit na view
 watchEffect(() => {
     let mode = usePage().url.endsWith('/edit') ? true : false;
     store.setMode(mode);
@@ -35,7 +37,7 @@ watchEffect(() => {
 </script>
 
 <template>
-    <Head :title="$page.url.endsWith('/edit') ? 'Project Edit' : 'Project View'" />
+    <Head :title="store.mode ? 'Project Edit' : 'Project View'" />
     <EditorLayout>
 
         <!-- Side Bar -->

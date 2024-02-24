@@ -6,8 +6,6 @@ const props = defineProps({
     children: Object,
 });
 
-console.log(props.children);
-
 const open = true; // zkus komentovat a odkomentovat a uvidíš chybu v paddingu, kterou si řešil nedávno
 
 </script>
