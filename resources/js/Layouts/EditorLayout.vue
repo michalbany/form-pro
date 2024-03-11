@@ -6,6 +6,7 @@ import DropdownLink from "@/Components/DropdownLink.vue";
 import NavLink from "@/Components/NavLink.vue";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink.vue";
 import { Link } from "@inertiajs/vue3";
+import { Badge } from "@/Components/ui/badge";
 
 const showingNavigationDropdown = ref(false);
 </script>
@@ -15,15 +16,21 @@ const showingNavigationDropdown = ref(false);
         <aside
             class="flex flex-col w-80 bg-gray-50 border-r p-2 min-h-screen h-full sticky top-0 left-0"
         >
-            <div class="shrink-0 m-2 mb-8 flex items-center gap-2 transition hover:bg-gray-200 p-2 rounded-md">
-                <Link :href="route('dashboard')" class="rounded-full border p-1.5 bg-white">
-                    <ApplicationLogo
-                        class="block h-5 w-auto"
-                    />
+            <div
+                class="shrink-0 m-2 mb-8 flex items-center gap-2 transition hover:bg-gray-200 p-2 rounded-md"
+            >
+                <Link
+                    :href="route('dashboard')"
+                    class="rounded-full border p-1.5 bg-white"
+                >
+                    <ApplicationLogo class="block h-5 w-auto" />
                 </Link>
                 <h3 class="font-bold cursor-default">Formense</h3>
             </div>
-            <p class="ml-2 my-2 text-xs text-gray-800 font-bold">This Project:</p>
+
+            <p class="ml-2 my-2 text-xs text-gray-800 font-bold">
+                This Project:
+            </p>
             <slot name="project-settings" />
             <p class="text-xs ml-2 my-2 text-blue-200 font-bold">Pages:</p>
 
@@ -39,23 +46,24 @@ const showingNavigationDropdown = ref(false);
             <p class="text-xs ml-2 my-2 text-blue-200 font-bold">App Menu</p>
             <p class="text-xs ml-2 my-2 text-blue-200 font-bold">App Menu</p>
             <p class="text-xs ml-2 my-2 text-blue-200 font-bold">App Menu</p> -->
-
         </aside>
 
         <main class="flex-grow">
             <nav class="border-b flex w-full">
+                <Badge variant="secondary" class="w-max h-max"> Edit Mode </Badge>
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
                         <div class="flex">
                             <!-- Logo -->
                             <!-- Navigation Links -->
+                            
                             <div
-                                class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"
+                            class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"
                             >
-                                <!-- <slot name="breadcrumbs" /> -->
-                                <NavLink
-                                    :href="route('dashboard')"
-                                    :active="route().current('dashboard')"
+                            <!-- <slot name="breadcrumbs" /> -->
+                            <NavLink
+                            :href="route('dashboard')"
+                            :active="route().current('dashboard')"
                                 >
                                     <template #icon>
                                         <box-icon
