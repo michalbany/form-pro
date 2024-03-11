@@ -17,7 +17,7 @@ const showingNavigationDropdown = ref(false);
             class="flex flex-col w-80 bg-gray-50 border-r p-2 min-h-screen h-full sticky top-0 left-0"
         >
             <div
-                class="shrink-0 m-2 mb-8 flex items-center gap-2 transition hover:bg-gray-200 p-2 rounded-md"
+                class="shrink-0 m-2 mb-6 flex items-center gap-2 transition hover:bg-gray-200 p-2 rounded-md"
             >
                 <Link
                     :href="route('dashboard')"
@@ -32,12 +32,12 @@ const showingNavigationDropdown = ref(false);
                 This Project:
             </p>
             <slot name="project-settings" />
-            <p class="text-xs ml-2 my-2 text-blue-200 font-bold">Pages:</p>
+            <p class="ml-2 my-2 mt-4 text-xs text-gray-800 font-bold">List of Pages:</p>
 
             <div class="max-h-96">
                 <slot name="page-list" />
             </div>
-            <p class="text-xs ml-2 my-2 text-blue-200 font-bold">App Menu</p>
+            <p class="ml-2 my-2 text-xs text-gray-800 font-bold">App Menu</p>
             <!-- <p class="text-xs ml-2 my-2 text-blue-200 font-bold">App Menu</p>
             <p class="text-xs ml-2 my-2 text-blue-200 font-bold">App Menu</p>
             <p class="text-xs ml-2 my-2 text-blue-200 font-bold">App Menu</p>
@@ -50,7 +50,7 @@ const showingNavigationDropdown = ref(false);
 
         <main class="flex-grow">
             <nav class="border-b flex w-full">
-                <Badge variant="secondary" class="w-max h-max"> Edit Mode </Badge>
+                <!-- <Badge variant="secondary" class="w-max h-max"> Edit Mode </Badge> -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
                         <div class="flex">
