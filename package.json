@@ -18,7 +18,13 @@
         "vue": "^3.2.41"
     },
     "dependencies": {
+        "@radix-icons/vue": "^1.0.0",
         "boxicons": "^2.1.4",
-        "pinia": "^2.0.0-rc.10"
+        "class-variance-authority": "^0.7.0",
+        "clsx": "^2.1.0",
+        "pinia": "^2.0.0-rc.10",
+        "radix-vue": "^1.5.1",
+        "tailwind-merge": "^2.2.1",
+        "tailwindcss-animate": "^1.0.7"
     }
 }

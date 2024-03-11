@@ -9,19 +9,19 @@ class Page extends Model
 {
     protected $fillable = ['project_id', 'parent_id', 'name'];
 
-    protected static function boot()
-    {
-        // generovani URL při vytvoření nebo úpravě stránky
-        parent::boot();
+    // protected static function boot()
+    // {
+    //     // generovani URL při vytvoření nebo úpravě stránky
+    //     parent::boot();
 
-        static::creating(function ($page) {
-            $page->slug = Str::slug($page->name) . '-' . Str::uuid();
-        });
+    //     static::creating(function ($page) {
+    //         $page->slug = Str::slug($page->name) . '-' . Str::uuid();
+    //     });
 
-        static::updating(function ($page) {
-            $page->slug = Str::slug($page->name) . '-' . Str::uuid();
-        });
-    }
+    //     static::updating(function ($page) {
+    //         $page->slug = Str::slug($page->name) . '-' . Str::uuid();
+    //     });
+    // }
     
 
     public function project()

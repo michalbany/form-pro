@@ -10,19 +10,19 @@ class Project extends Model
 {
     protected $fillable = ['name'];
 
-    protected static function boot()
-    {
-        // generovani URL při vytvoření nebo úpravě projektu
-        parent::boot();
+    // protected static function boot()
+    // {
+    //     // generovani URL při vytvoření nebo úpravě projektu
+    //     parent::boot();
 
-        static::creating(function ($project) {
-            $project->slug = Str::slug('project') . Str::slug($project->name) . '-' . Str::uuid();
-        });
+    //     static::creating(function ($project) {
+    //         $project->slug = Str::slug('project') . Str::slug($project->name) . '-' . Str::uuid();
+    //     });
 
-        static::updating(function ($project) {
-            $project->slug = Str::slug('project') . Str::slug($project->name) . '-' . Str::uuid();
-        });
-    }
+    //     static::updating(function ($project) {
+    //         $project->slug = Str::slug('project') . Str::slug($project->name) . '-' . Str::uuid();
+    //     });
+    // }
 
     public function pages()
     {

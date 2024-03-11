@@ -13,21 +13,21 @@ const showingNavigationDropdown = ref(false);
 <template>
     <div class="flex selection:bg-blue-200 selection:text-red-300">
         <aside
-            class="flex flex-col w-80 bg-blue-500 border-r p-2 min-h-screen h-full sticky top-0 left-0"
+            class="flex flex-col w-80 bg-gray-50 border-r p-2 min-h-screen h-full sticky top-0 left-0"
         >
-            <div class="shrink-0 m-2 ml-4 mb-10 flex items-center">
-                <Link :href="route('dashboard')">
+            <div class="shrink-0 m-2 mb-8 flex items-center gap-2 transition hover:bg-gray-200 p-2 rounded-md">
+                <Link :href="route('dashboard')" class="rounded-full border p-1.5 bg-white">
                     <ApplicationLogo
-                        color="white"
-                        class="block h-9 w-auto fill-current text-gray-800"
+                        class="block h-5 w-auto"
                     />
                 </Link>
+                <h3 class="font-bold cursor-default">Formense</h3>
             </div>
-            <p class="ml-2 my-2 text-xs text-blue-200 font-bold">Project:</p>
+            <p class="ml-2 my-2 text-xs text-gray-800 font-bold">This Project:</p>
             <slot name="project-settings" />
             <p class="text-xs ml-2 my-2 text-blue-200 font-bold">Pages:</p>
 
-            <div class="max-h-96 overflow-y-auto overflow-x-hidden">
+            <div class="max-h-96">
                 <slot name="page-list" />
             </div>
             <p class="text-xs ml-2 my-2 text-blue-200 font-bold">App Menu</p>
