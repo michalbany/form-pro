@@ -55,6 +55,7 @@ store.loadProjectData(project);
                 <ProjectView /> DEFAULT
  -->
 
+ <!-- @!!! -->
  <!-- @idea: Zjistíme jestli máme data pro Page pokud
      ne tak používáme inicializační data. Data z Page jdou přes InertiaPage -->
 

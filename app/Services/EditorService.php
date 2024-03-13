@@ -44,7 +44,8 @@ class EditorService
         $parentPages = $project->scopeParentPages;
         $data = [];
         foreach ($parentPages as $parentPage) {
-            $data[] = [
+            // asociativní pole s ID jako klíčem
+            $data[$parentPage->id] = [
                 'id' => $parentPage->id,
                 'name' => $parentPage->name,
                 'parent_id' => $parentPage->parent_id,
@@ -63,7 +64,7 @@ class EditorService
         $subpages = $page->children;
         $data = [];
         foreach ($subpages as $subpage) {
-            $data[] = [
+            $data[$subpage->id] = [
                 'id' => $subpage->id,
                 'name' => $subpage->name,
                 'parent_id' => $subpage->parent_id,

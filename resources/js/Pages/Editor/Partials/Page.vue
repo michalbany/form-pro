@@ -5,22 +5,24 @@ import DropdownCall from "@/Components/DropdownCall.vue";
 import { Link } from "@inertiajs/vue3";
 import { useProjectStore } from "@/Store/projectStore";
 
-const store = useProjectStore();
-const editorMode = ref(store.getActiveMode());
-const projectID = store.projectData.id;
+// const store = useProjectStore();
+// const editorMode = ref(store.getActiveMode());
+// const projectID = store.projectData.id;
 
 const props = defineProps({
     page: Object,
+    key: Number,
 });
 
 
 </script>
 
 <template>
+
     <Link
         class="cursor-pointer relative group flex justify-between items-center px-3 py-1 min-h-8 rounded-md font-semibold text-md text-foreground hover:bg-gray-200 transition"
         :title="page.name"
-        :href="route(`${editorMode}.page.show`, [projectID, page.id])"
+        href="#"
         :class="{
             'bg-gray-200': route().current('edit.page.show', page.id),
         }"
@@ -29,7 +31,6 @@ const props = defineProps({
         <div class="flex items-center gap-1 flex-grow truncate">
             <a
                 @click.prevent="store.togglePageOpen(page.id)"
-                v-if="Object.keys(page.children).length > 0"
                 class="group/arrow flex items-center justify-center p-0.5 transition hover:bg-gray-300 rounded-md"
             >
                 <box-icon
