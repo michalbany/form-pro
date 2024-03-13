@@ -10,6 +10,7 @@ use App\Http\Controllers\{
     TextFieldController,
     PageController
 };
+use App\Services\EditorService;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,63 +36,61 @@ Route::get('/', function () {
 Route::get('/dashboard', [ProjectController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
-
-// FINE  vytvoření nového projektu 
-Route::post('/projects', [ProjectController::class, 'create'])
+    
+    // FINE  vytvoření nového projektu 
+    Route::post('/projects', [ProjectController::class, 'create'])
     ->middleware(['auth', 'verified'])
     ->name('projects.create');
-
-// FINE  smazání projektu
-Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])
+    
+    // FINE  smazání projektu
+    Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])
     ->middleware(['auth', 'verified'])
     ->name('projects.destroy');
-
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-
-// @todo: Optimalizace route pro oddělení stánky a projektu
-
-// @note: Routes pro Editor:
+    
+    
+    Route::middleware('auth')->group(function () {
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    });
+    
+    
+    // @todo: Optimalizace route pro oddělení stánky a projektu
+    
+    // @note: Routes pro Editor:
+    Route::get('/test/{project}', [EditorService::class, 'test']);
 
 // -------------------------- //
 
-// Pro zobrazení editoru a načtení základních dat
-Route::get('/project/{project}/edit', [ProjectController::class, 'show'])
+
+Route::get('/project/{project}/edit', [EditorService::class, 'init'])
     ->middleware(['auth', 'verified'])
     ->name('edit.project.show');
 
-
-// Zobrazení jednotlivé stránky projektu
-Route::get('/project/{project}/{page}/edit', [PageController::class, 'show'])
-    ->middleware(['auth', 'verified'])
-    ->name('edit.page.show');
-    
-    
-Route::get('/project/{project}/view', [ProjectController::class, 'show'])
-    ->middleware(['auth', 'verified'])
-    ->name('view.project.show');
-
-
-// Zobrazení jednotlivé stránky projektu
-Route::get('/project/{project}/{page}/view', [PageController::class, 'show'])
-    ->middleware(['auth', 'verified'])
-    ->name('view.page.show');
-
-// // SLUG ROUTES
-// Route::get('/project/{project:slug}/edit', [ProjectController::class, 'show'])
+// @deprecated - Smazat metody v Controllerech následně
+// // Pro zobrazení editoru a načtení základních dat
+// Route::get('/project/{project}/edit', [ProjectController::class, 'show'])
 //     ->middleware(['auth', 'verified'])
-//     ->name('project.show');
+//     ->name('edit.project.show');
 
 
 // // Zobrazení jednotlivé stránky projektu
-// Route::get('/project/{page:slug}/edit', [PageController::class, 'show'])
+// Route::get('/project/{project}/{page}/edit', [PageController::class, 'show'])
 //     ->middleware(['auth', 'verified'])
-//     ->name('page.show');
+//     ->name('edit.page.show');
+    
+    
+// Route::get('/project/{project}/view', [ProjectController::class, 'show'])
+//     ->middleware(['auth', 'verified'])
+//     ->name('view.project.show');
+
+
+// // Zobrazení jednotlivé stránky projektu
+// Route::get('/project/{project}/{page}/view', [PageController::class, 'show'])
+//     ->middleware(['auth', 'verified'])
+//     ->name('view.page.show');
+
+
 
 // -------------------------- //
 

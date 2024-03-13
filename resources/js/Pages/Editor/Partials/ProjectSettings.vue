@@ -26,13 +26,13 @@ const project = ref(store.projectData);
         :title="project.name"
         :href="route(`${editorMode}.project.show`, project.id)"
         :class="{
-            'bg-blue-600': route().current('edit.project.show', project.id),
+            'bg-gray-200': route().current('edit.project.show', project.id),
         }"
-        class="relative min-h-11 group flex justify-between items-center px-3 py-2 rounded-md font-semibold text-md text-white hover:bg-blue-600 transition"
+        class="relative min-h-11 flex group justify-between items-center px-3 py-2 rounded-md font-semibold text-md text-foreground hover:bg-gray-200 transition"
     >
         <div class="flex items-center gap-2 truncate">
             <box-icon
-                class="fill-white group-hover:fill-blue-200 w-5 h-5 transition flex-shrink-0"
+                class="fill-blue-500 w-5 h-5 transition flex-shrink-0"
                 type="solid"
                 name="file-blank"
             ></box-icon>
@@ -43,10 +43,10 @@ const project = ref(store.projectData);
 
         <a
             href="#"
-            class="ml-1 group-hover:flex items-center hidden justify-center p-1 group/plus transition hover:bg-red-300 rounded-md"
+            class="ml-1 cursor-pointer group-hover:flex items-center hidden justify-center p-1 group/plus transition hover:bg-red-300 rounded-md"
         >
             <box-icon
-                class="h-5 w-5 fill-white"
+                class="h-5 w-5"
                 name="message-alt-add"
             ></box-icon>
             <p

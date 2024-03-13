@@ -13,27 +13,19 @@ import { useProjectStore } from "@/Store/projectStore";
  * @does Render SideBar, Project Settings and Global Functions
  */
 const store = useProjectStore();
-const { pages, id, name, created_at, updated_at } = usePage().props;
-const project = ref({ id, name, created_at, updated_at });
+const { project, parentPages } = usePage().props;
 
-watchEffect(() => {
-    store.loadPages(pages); // Toto udajně není efektivní předávat cely objekt - mohl bych předávat pouze důleži
-    store.loadProjectData(project.value);
-    let mode = usePage().url.endsWith('/edit') ? true : false;
-    store.setMode(mode);
-    // store.resetStore(id); // Resetujeme uložiště při změně projektu -- tedy jiné ID projektu --- Možná to není potřeba protože watchEffect se spustí jen když se změní ID projektu
-});
-
-// console.log('store:', store.pages);
-// Co se týče stavu editoru, tak zjištění o jaký stav jde by mělo být už dřív řešené. Buď na dashvoard nebo na backendu
-// že pokud nemáš práva na editaci, tak se ti nezobrazí tlačítko editace. A proběhne přesměrování z edit na view
+// Nyní načteme inicializační data do store, aby byly dostupné i v jiných routách
+store.loadPages(parentPages);
+store.loadProjectData(project);
 
 
+// další globální nastavení editoru
 
 </script>
 
 <template>
-    <Head :title="store.mode ? 'Project Edit' : 'Project View'" />
+    <Head title="Editing..." />
     <EditorLayout>
 
         <!-- Side Bar -->
@@ -62,6 +54,9 @@ watchEffect(() => {
                 <PageView />
                 <ProjectView /> DEFAULT
  -->
+
+ <!-- @idea: Zjistíme jestli máme data pro Page pokud
+     ne tak používáme inicializační data. Data z Page jdou přes InertiaPage -->
 
         <!-- <PageDetail :page="page" :selected="selected" @select="handleSelect" @create-sub-page="handleCreateSubPage" @delete-page="handleDelete" /> -->
         </template>

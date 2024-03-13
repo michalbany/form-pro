@@ -18,19 +18,22 @@ const props = defineProps({
 
 <template>
     <Link
-        class="cursor-pointer relative group flex justify-between items-center px-3 py-1 min-h-8 rounded-md font-semibold text-md text-white hover:bg-blue-600 transition"
+        class="cursor-pointer relative group flex justify-between items-center px-3 py-1 min-h-8 rounded-md font-semibold text-md text-foreground hover:bg-gray-200 transition"
         :title="page.name"
         :href="route(`${editorMode}.page.show`, [projectID, page.id])"
+        :class="{
+            'bg-gray-200': route().current('edit.page.show', page.id),
+        }"
        
     >
         <div class="flex items-center gap-1 flex-grow truncate">
             <a
                 @click.prevent="store.togglePageOpen(page.id)"
                 v-if="Object.keys(page.children).length > 0"
-                class="group/arrow flex items-center justify-center p-0.5 transition hover:bg-blue-500 rounded-md"
+                class="group/arrow flex items-center justify-center p-0.5 transition hover:bg-gray-300 rounded-md"
             >
                 <box-icon
-                    class="fill-blue-300 group-hover/arrow:fill-white h-5 w-5 transition"
+                    class="fill-blue-300 group-hover/arrow:fill-blue-500 h-5 w-5 transition"
                     :class="{
                         'rotate-90': page.open,
                         'rotate-0': !page.open,
@@ -53,11 +56,11 @@ const props = defineProps({
                     <template #trigger>
                         <button
                         type="button"
-                        class="group/arrow flex items-center justify-center p-0.5 transition hover:bg-blue-500 rounded-md"
+                        class="group/arrow flex items-center justify-center p-0.5 transition hover:bg-gray-300 rounded-md"
                         >
                         <box-icon
                         name="dots-vertical-rounded"
-                        class="h-5 w-5 fill-blue-300 group-hover/arrow:fill-white"
+                        class="h-5 w-5 fill-blue-300 group-hover/arrow:fill-blue-500"
                         ></box-icon>
                     </button>
                 </template>
@@ -78,7 +81,7 @@ const props = defineProps({
                 class="flex items-center justify-center p-0.5 group/plus transition hover:bg-red-300 rounded-md"
             >
                 <box-icon
-                    class="h-5 w-5 fill-white"
+                    class="h-5 w-5"
                     name="message-alt-add"
                 ></box-icon>
                 <p
@@ -92,8 +95,6 @@ const props = defineProps({
 </template>
 
 <style>
-.selected-item {
-    background-color: #376fe9;
-}
+
 
 </style>
