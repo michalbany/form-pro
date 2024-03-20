@@ -25,7 +25,7 @@ const showingNavigationDropdown = ref(false);
                 >
                     <ApplicationLogo class="block h-5 w-auto" />
                 </Link>
-                <h3 class="font-bold cursor-default">Formense</h3>
+                <h3 class="font-bold cursor-default">Blueprint</h3>
             </div>
 
             <p class="ml-2 my-2 text-xs text-gray-800 font-bold">

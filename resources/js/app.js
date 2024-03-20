@@ -17,7 +17,10 @@ createInertiaApp({
     resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')),
     setup({ el, App, props, plugin }) {
         const app = createApp({ render: () => h(App, props) });
-            
+        
+        // @works: Přidáváme plugin pro BoxIcons
+        app.component('box-icon', 'box-icon');
+
         app.use(plugin)
             .use(ZiggyVue)
             .use(pinia)
