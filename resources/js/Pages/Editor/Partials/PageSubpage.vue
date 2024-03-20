@@ -1,37 +1,47 @@
 <script setup>
-import { defineProps } from "vue";
+import { ref, defineProps, onMounted } from "vue";
 import Page from "./Page.vue";
 import { useProjectStore } from "@/Store/projectStore";
+import { usePage } from "@inertiajs/vue3";
 
 const store = useProjectStore();
+const subPages = ref(null);
 
 const props = defineProps({
-    children: Object,
-    open: Boolean,
+    index: String,
 });
 
+// V tenhle moment budeme načítat subpages
+onMounted(() => {
+    const subpagesData = usePage().props.subpages[props.index];
+    if (subpagesData && subpagesData.length !== 0) {
+        subPages.value = subpagesData;
+    }
+});
 
 </script>
 
 <template>
-    <ul
-        v-show="open"
-        class="flex pl-6 flex-col gap-0.5 relative :pseudo-line"
-    >
-        <li v-for="page in children" :key="page.id">
-            
+    <ul class="flex pl-6 flex-col gap-0.5 relative :pseudo-line">
+
+
+        <li v-if="subPages" v-for="(page, index) in subPages" :key="page.id">
             <Page
                 :page="page"
-                :key="page.id"
-                @toggle-open="store.togglePageOpen(page.id)"
             />
 
             <PageSubpage
                 class="mt-0.5"
-                :children="page.children"
-                :open="page.open"
-                v-if="Object.keys(page.children).length > 0"
+                v-if="store.openPages.includes(page.id)"
+                :index="index"
             />
+        </li>
+
+
+        <li v-else>
+            <p class="text-sm text-gray-500 px-3 py-1 italic">
+                No pages inside
+            </p>
         </li>
     </ul>
 </template>
@@ -42,10 +52,10 @@ const props = defineProps({
     position: absolute;
     bottom: 5px;
     top: 5px;
-    left: 13px;
-    width: 2px;
+    left: 0px;
+    width: 1px;
     border-radius: 5px;
     height: auto;
-    background-color: #60a5fa;
+    background-color: #e4e3e3;
 }
 </style>

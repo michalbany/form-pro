@@ -58,7 +58,8 @@ Route::get('/dashboard', [ProjectController::class, 'index'])
     // @todo: Optimalizace route pro oddělení stánky a projektu
     
     // @note: Routes pro Editor:
-    Route::get('/test/{project}', [EditorService::class, 'test']);
+    Route::get('/test/{project}', [EditorService::class, 'test'])
+        ->name('test');
 
 // -------------------------- //
 
@@ -66,6 +67,11 @@ Route::get('/dashboard', [ProjectController::class, 'index'])
 Route::get('/project/{project}/edit', [EditorService::class, 'init'])
     ->middleware(['auth', 'verified'])
     ->name('edit.project.show');
+
+    //@remove: Nepotřebujeme. Můžeme využít přímo tu horní
+Route::get('/project/{page}/subpages', [EditorService::class, 'loadSubpages'])
+    ->middleware(['auth', 'verified'])
+    ->name('edit.page.subpages');
 
 // @deprecated - Smazat metody v Controllerech následně
 // // Pro zobrazení editoru a načtení základních dat

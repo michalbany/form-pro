@@ -4,7 +4,10 @@ namespace App\Services;
 
 use App\Models\Page;
 use App\Models\Project;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
+use Mockery\Undefined;
 
 class EditorService
 {
@@ -19,9 +22,16 @@ class EditorService
      * Inicializace editoru pro projekt
      * @param ini $project_id
      */
-    public function init(Project $project)
+    public function init(Request $request, Project $project)
     {
-        $data = [
+        $pageId = $request->input('page');
+        $page = null;
+
+        if ($pageId) {
+            $page = Page::find($pageId);
+        }
+
+        $initData = [
             'project' => [
                 'id' => $project->id,
                 'name' => $project->name,
@@ -31,7 +41,12 @@ class EditorService
             'parentPages' => $this->loadParentPages($project)
         ];
 
-        return Inertia::render('Editor/EditorGlobalSettings', $data);
+        // ddd($page);
+
+        return Inertia::render('Editor/EditorGlobalSettings', [
+            'initData' => $initData,
+            'subpages' => $page ? Inertia::lazy(fn () => $this->loadSubpages($page)) : [],
+    ]);
     }
 
     /**
@@ -63,6 +78,7 @@ class EditorService
     {
         $subpages = $page->children;
         $data = [];
+        
         foreach ($subpages as $subpage) {
             $data[$subpage->id] = [
                 'id' => $subpage->id,
@@ -71,7 +87,9 @@ class EditorService
             ];
         }
 
-        return $data;
+        $finalData = [$page->id => $data];
+
+        return $finalData;
     }
 
     /**
@@ -82,8 +100,10 @@ class EditorService
         //
     }
 
-    public function test(Project $project)
+    public function test(Project $project, Page $page = null)
     {
+
+        ddd($page);
         ddd($project);
     }
 }

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watchEffect } from 'vue';
+import { reactive, watchEffect } from 'vue';
 import { usePage } from '@inertiajs/vue3';
 import EditorLayout from '@/Layouts/EditorLayout.vue';
 import PageList from './Partials/PageList.vue';
@@ -13,7 +13,7 @@ import { useProjectStore } from "@/Store/projectStore";
  * @does Render SideBar, Project Settings and Global Functions
  */
 const store = useProjectStore();
-const { project, parentPages } = usePage().props;
+const { project, parentPages } = usePage().props.initData;
 
 // Nyní načteme inicializační data do store, aby byly dostupné i v jiných routách
 store.loadPages(parentPages);
@@ -34,7 +34,7 @@ store.loadProjectData(project);
         </template>
         
         <template #page-list>
-            <PageList />
+            <PageList/>
         </template>
         
 
