@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
-import { usePage } from '@inertiajs/vue3'
 
 /**
  * Store bude uchovávat inicializační data Editoru

@@ -22,16 +22,17 @@ function loadSubpages(pageId) {
     return;
   }
   
-  Inertia.visit(route('edit.project.show', { project: projectID }), { 
-    data: { page: pageId },
-    preserveState: true,
-    replace: true,
+  Inertia.reload({
     only: ['subpages'],
+    data: { page: pageId },
+    preserveScroll: true,
+    preserveState: true,
     onSuccess: (page) => {
         store.togglePage(pageId)
     }
-  });
+  })
 }
+
 
 </script>
 
