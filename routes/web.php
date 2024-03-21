@@ -68,10 +68,9 @@ Route::get('/project/{project}/edit', [EditorService::class, 'init'])
     ->middleware(['auth', 'verified'])
     ->name('edit.project.show');
 
-    //@remove: Nepotřebujeme. Můžeme využít přímo tu horní
-Route::get('/project/{page}/subpages', [EditorService::class, 'loadSubpages'])
+Route::get('/project/{project}/{page}/edit', [EditorService::class, 'init'])
     ->middleware(['auth', 'verified'])
-    ->name('edit.page.subpages');
+    ->name('edit.page.show');
 
 // @deprecated - Smazat metody v Controllerech následně
 // // Pro zobrazení editoru a načtení základních dat

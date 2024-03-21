@@ -28,8 +28,6 @@ function loadSubpages(pageId) {
     replace: true,
     only: ['subpages'],
     onSuccess: (page) => {
-        console.log("Finished")
-        // store.reloadForSubpages = true,
         store.togglePage(pageId)
     }
   });
@@ -40,7 +38,6 @@ function loadSubpages(pageId) {
 <template>
     <div
         class="cursor-pointer relative group flex justify-between items-center px-3 py-1 min-h-8 rounded-md font-semibold text-md text-foreground hover:bg-gray-200 transition"
-        :title="page.name"
         :class="{
             'bg-gray-200': route().current('edit.page.show', page.id),
         }"
@@ -60,9 +57,14 @@ function loadSubpages(pageId) {
                 ></box-icon>
             </a>
 
-            <span class="text-sm flex-grow select-none truncate">
+            <Link 
+                :title="page.name"
+                :href="route('edit.page.show', { project: projectID, page: page.id })"
+                preserve-state
+                replace
+                class="text-sm flex-grow select-none truncate">
                 {{ page.name }}
-            </span>
+            </Link>
         </div>
 
         <div class="ml-1 hidden group-hover:flex gap-1 items-center">

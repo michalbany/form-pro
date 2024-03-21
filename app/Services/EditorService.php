@@ -41,8 +41,6 @@ class EditorService
             'parentPages' => $this->loadParentPages($project)
         ];
 
-        // ddd($page);
-
         return Inertia::render('Editor/EditorGlobalSettings', [
             'initData' => $initData,
             'subpages' => $page ? Inertia::lazy(fn () => $this->loadSubpages($page)) : [],

@@ -22,7 +22,8 @@ const project = ref(store.projectData);
 
 <template>
     <Link
-        :preserve-state="true"
+        preserve-state
+        replace
         :title="project.name"
         :href="route(`${editorMode}.project.show`, project.id)"
         :class="{
