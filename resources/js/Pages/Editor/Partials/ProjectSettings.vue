@@ -9,6 +9,10 @@ const editorMode = ref(store.getActiveMode());
 const project = ref(store.projectData);
 
 
+const props = defineProps({
+    active: Boolean,
+})
+
 /**
  * 
  * Routy se musí nastavovat nastavovat reaktivně. Jestli edit. nebo view.??? 
@@ -22,12 +26,13 @@ const project = ref(store.projectData);
 
 <template>
     <Link
+        @click="store.setActivePage(null)"
         preserve-state
         replace
         :title="project.name"
         :href="route(`${editorMode}.project.show`, project.id)"
         :class="{
-            'bg-gray-200': route().current('edit.project.show', project.id),
+            'bg-gray-200': active,
         }"
         class="relative min-h-11 flex group justify-between items-center px-3 py-2 rounded-md font-semibold text-md text-foreground hover:bg-gray-200 transition"
     >

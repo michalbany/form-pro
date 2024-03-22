@@ -10,6 +10,7 @@ export const useProjectStore = defineStore('projectStore', {
         mode: true,
         parentPages: [],
         openPages: [],
+        activePage: null,
     }),
     actions: {
         // @works: Potřebujeme uchovávat inicializační data pro editor
@@ -22,6 +23,9 @@ export const useProjectStore = defineStore('projectStore', {
 
         togglePage(pageId) {
             this.openPages = this.openPages.includes(pageId) ? this.openPages.filter(id => id !== pageId) : [...this.openPages, pageId];
+        },
+        setActivePage(pageId) {
+            this.activePage = pageId;
         },
 
 

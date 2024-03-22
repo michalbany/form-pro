@@ -28,6 +28,7 @@ onMounted(() => {
         <li v-if="subPages" v-for="(page, index) in subPages" :key="page.id">
             <Page
                 :page="page"
+                :active="store.activePage === page.id ? true : false"
             />
 
             <PageSubpage

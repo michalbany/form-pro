@@ -13,7 +13,9 @@ const parentPages = store.parentPages;
         <li v-for="(page, index) in parentPages" :key="page.id">
             <!-- @idea: vždy předáváme props, abychom rozhodování jestli se jedná
             o parentPages nebo Subpages řešili ZDE -->
-            <Page :page="page" />
+            <Page :page="page"
+            :active="store.activePage === page.id ? true : false"
+            />
             
             <!-- @idea: Subpage už se volá ze serveru, ale page jde z inicializace -->
 

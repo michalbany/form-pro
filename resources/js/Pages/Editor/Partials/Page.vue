@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, ref } from "vue";
+import { defineProps, ref, computed } from "vue";
 import Dropdown from "@/Components/Dropdown.vue";
 import DropdownCall from "@/Components/DropdownCall.vue";
 import { Link } from "@inertiajs/vue3";
@@ -7,40 +7,40 @@ import { useProjectStore } from "@/Store/projectStore";
 import { router as Inertia } from "@inertiajs/vue3";
 
 const store = useProjectStore();
-// const editorMode = ref(store.getActiveMode());
 const projectID = store.projectData.id;
 
 const props = defineProps({
     page: Object,
-    key: Number,
+    active: Boolean,
 });
 
+console.log(store.activePage);
+
 function loadSubpages(pageId) {
-  // Aktualizace aktuální stránky s novým parametrem, který indikuje, že chceme načíst podstránky
-  if (store.openPages.includes(pageId)) {
-    store.togglePage(pageId);
-    return;
-  }
-  
-  Inertia.reload({
-    only: ['subpages'],
-    data: { page: pageId },
-    preserveScroll: true,
-    preserveState: true,
-    onSuccess: (page) => {
-        store.togglePage(pageId)
+    // Aktualizace aktuální stránky s novým parametrem, který indikuje, že chceme načíst podstránky
+    if (store.openPages.includes(pageId)) {
+        store.togglePage(pageId);
+        return;
     }
-  })
+
+    Inertia.reload({
+        only: ["subpages"],
+        data: { page: pageId },
+        preserveScroll: true,
+        preserveState: true,
+        replace: true,
+        onSuccess: (page) => {
+            store.togglePage(pageId);
+        },
+    });
 }
-
-
 </script>
 
 <template>
     <div
         class="cursor-pointer relative group flex justify-between items-center px-3 py-1 min-h-8 rounded-md font-semibold text-md text-foreground hover:bg-gray-200 transition"
         :class="{
-            'bg-gray-200': route().current('edit.page.show', page.id),
+            'bg-gray-200': active,
         }"
     >
         <div class="flex items-center gap-1 flex-grow truncate">
@@ -58,12 +58,19 @@ function loadSubpages(pageId) {
                 ></box-icon>
             </a>
 
-            <Link 
+            <Link
+                @click="store.setActivePage(page.id)"
                 :title="page.name"
-                :href="route('edit.page.show', { project: projectID, page: page.id })"
+                :href="
+                    route('edit.page.show', {
+                        project: projectID,
+                        page: page.id,
+                    })
+                "
                 preserve-state
                 replace
-                class="text-sm flex-grow select-none truncate">
+                class="text-sm flex-grow select-none truncate"
+            >
                 {{ page.name }}
             </Link>
         </div>

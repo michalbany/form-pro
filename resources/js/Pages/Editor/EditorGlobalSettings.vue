@@ -30,7 +30,9 @@ store.loadProjectData(project);
 
         <!-- Side Bar -->
         <template #project-settings>
-            <ProjectSettings />
+            <ProjectSettings 
+                :active="store.activePage === null ? true : false"
+            />
         </template>
         
         <template #page-list>
