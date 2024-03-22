@@ -15,22 +15,66 @@ class EditorService
     /**
      * Správa funkcionality editoru. Inicializace + správa akcí
      * 
+     * Renderovat stránku musí vždy ta metoda, která je volana z web.php
      * 
      */
+
+    /**
+     * Show na route project
+     * @param $request
+     * @param $project
+     * @return Inertia::render
+     */
+    public function show(Request $request, Project $project) {
+        
+        $pageFromRequest = $this->getPageFromRequest($request);
+        $initData = $this->init($project);
+
+
+        return Inertia::render('Editor/EditorGlobalSettings', [
+            'initData' => $initData,
+            'subpages' => $pageFromRequest ? $this->loadSubpages($pageFromRequest) : [],
+        ]);
+    }
+
+    /**
+     * Show na route page
+     * @param $request
+     * @param $project
+     * @param $page
+     * @return Inertia::render
+     */
+    public function showPage(Request $request, Project $project, Page $page)
+    {
+        $pageFromRequest = $this->getPageFromRequest($request);
+
+        $pageData = [
+            'page' => [
+                'id' => $page->id,
+                'name' => $page->name,
+                'content' => $page->content,
+                'created_at' => $page->created_at,
+                'updated_at' => $page->updated_at,
+            ],
+        ];
+
+        $initData = $this->init($project);
+
+        return Inertia::render('Editor/EditorGlobalSettings', [
+            'initData' => $initData,
+            'pageData' => $pageData,
+            'subpages' => $pageFromRequest ? $this->loadSubpages($pageFromRequest) : [],
+
+
+        ]);
+    }
 
     /**
      * Inicializace editoru pro projekt
      * @param ini $project_id
      */
-    public function init(Request $request, Project $project)
+    public function init(Project $project)
     {
-        $pageId = $request->input('page');
-        $page = null;
-
-        if ($pageId) {
-            $page = Page::find($pageId);
-        }
-
         $initData = [
             'project' => [
                 'id' => $project->id,
@@ -41,10 +85,7 @@ class EditorService
             'parentPages' => $this->loadParentPages($project)
         ];
 
-        return Inertia::render('Editor/EditorGlobalSettings', [
-            'initData' => $initData,
-            'subpages' => $page ? Inertia::lazy(fn () => $this->loadSubpages($page)) : [],
-    ]);
+        return $initData;
     }
 
     /**
@@ -98,6 +139,21 @@ class EditorService
         //
     }
 
+    private function getPageFromRequest(Request $request)
+    {
+        $pageId = $request->input('pageId');
+        $page = null;
+
+        if ($pageId) {
+            $page = Page::find($pageId);
+        }
+
+        return $page;
+    }
+
+    /**
+     * Testovací metoda
+     */
     public function test(Project $project, Page $page = null)
     {
 

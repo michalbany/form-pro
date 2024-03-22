@@ -64,13 +64,17 @@ Route::get('/dashboard', [ProjectController::class, 'index'])
 // -------------------------- //
 
 
-Route::get('/project/{project}/edit', [EditorService::class, 'init'])
+Route::get('/project/{project}/edit', [EditorService::class, 'show'])
     ->middleware(['auth', 'verified'])
     ->name('edit.project.show');
 
-Route::get('/project/{project}/{page}/edit', [EditorService::class, 'init'])
+Route::get('/project/{project}/{page}/edit', [EditorService::class, 'showPage'])
     ->middleware(['auth', 'verified'])
     ->name('edit.page.show');
+
+// Route::get('/subpages/{page}', [EditorService::class, 'loadSubpages'])
+//     ->middleware(['auth', 'verified'])
+//     ->name('load.subpages');
 
 // @deprecated - Smazat metody v Controllerech následně
 // // Pro zobrazení editoru a načtení základních dat

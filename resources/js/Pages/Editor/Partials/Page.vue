@@ -23,7 +23,7 @@ function loadSubpages(pageId) {
 
     Inertia.reload({
         only: ["subpages"],
-        data: { page: pageId },
+        data: { pageId: pageId },
         preserveScroll: true,
         preserveState: true,
         replace: true,

@@ -223,7 +223,7 @@ const showingNavigationDropdown = ref(false);
             </nav>
 
             <!-- @note: Tímto přestane fungovat původní editor -->
-            <!-- <slot name="project-detail" /> -->
+            <slot name="project-detail" />
             <slot name="main-content" />
         </main>
     </div>
