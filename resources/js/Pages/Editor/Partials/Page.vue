@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, ref, computed } from "vue";
+import { defineProps } from "vue";
 import Dropdown from "@/Components/Dropdown.vue";
 import DropdownCall from "@/Components/DropdownCall.vue";
 import { Link } from "@inertiajs/vue3";
@@ -13,8 +13,6 @@ const props = defineProps({
     page: Object,
     active: Boolean,
 });
-
-console.log(store.activePage);
 
 function loadSubpages(pageId) {
     // Aktualizace aktuální stránky s novým parametrem, který indikuje, že chceme načíst podstránky
