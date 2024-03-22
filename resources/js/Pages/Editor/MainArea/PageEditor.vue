@@ -11,5 +11,10 @@ watchEffect(() => {
 </script>
 
 <template>
-    <h2>{{ pageData.name }}</h2>
+    <main class="px-12">
+        <section class="mt-6">
+            <h1 class="block w-full text-3xl">{{ pageData.name }}</h1>
+        </section>
+
+    </main>
 </template>
