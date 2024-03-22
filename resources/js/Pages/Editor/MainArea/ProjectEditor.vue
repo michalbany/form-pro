@@ -1,10 +1,10 @@
 <script setup>
 import { usePage } from "@inertiajs/vue3";
 
+const { project } = usePage().props.initData
 
-console.log(usePage().props)
 </script>
 
 <template>
-    <h2>ProjectEditor</h2>
+    <h2>{{ project.name }}</h2>
 </template>
