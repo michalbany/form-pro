@@ -5,9 +5,7 @@ namespace App\Services;
 use App\Models\Page;
 use App\Models\Project;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
-use Mockery\Undefined;
 
 class EditorService
 {
@@ -39,7 +37,7 @@ class EditorService
 
     /**
      * Show na route page
-     * @param $request
+     * @param $request -> kvůli načítání subpages na url page
      * @param $project
      * @param $page
      * @return Inertia::render
@@ -56,6 +54,7 @@ class EditorService
                 'created_at' => $page->created_at,
                 'updated_at' => $page->updated_at,
             ],
+            'content' => $page->content,
         ];
 
         $initData = $this->init($project);
@@ -132,7 +131,7 @@ class EditorService
     }
 
     /**
-     * V Budoucnu...
+     * V Budoucnu...myšleno projekt
      */
     public function canBeEdited()
     {

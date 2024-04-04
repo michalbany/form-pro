@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 
 class Page extends Model
 {
@@ -32,5 +31,10 @@ class Page extends Model
     public function textFields()
     {
         return $this->hasMany(TextField::class);
+    }
+
+    public function content()
+    {
+        return $this->hasMany(PageComponent::class);
     }
 }
