@@ -1,9 +1,12 @@
 <script setup>
 import { defineProps, computed } from 'vue';
+import TextEditor from '@/Components/TextEditor.vue'
 
-defineProps({
+
+const props = defineProps({
     component: Object,
 });
+
 
 const contentLengthDifference = computed(() => {
     if (form.content === null) {
@@ -22,10 +25,22 @@ const contentLengthDifference = computed(() => {
     }
     return output;
 });
+
+
 </script>
 
 
 <template>
-   {{ component.id }}
+   <!-- {{ component.type }} -->
+
+   <TextEditor :content="component.content" />
+
+   <!-- <textarea
+        class="border-none focus:outline-none focus:border-none focus:ring-2 focus:ring-gray-300 rounded-md font-sans resize-none block w-full text-md"
+        rows="5"
+        placeholder="Enter TextField Content"
+        v-model="component.content"
+        /> -->
+
 
 </template>

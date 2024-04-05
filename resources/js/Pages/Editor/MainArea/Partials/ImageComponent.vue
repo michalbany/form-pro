@@ -9,5 +9,7 @@ defineProps({
 
 
 <template>
-   {{ component.id }}
+   <!-- {{ component.type }} -->
+
+   <input type="file" />
 </template>

@@ -65,14 +65,8 @@ const groupComponents = computed(() => {
 
         <section>
             <template v-for="group in groupComponents" :key="group.groupId">
-                <div :class="{ 'flex gap-5': group.groupId.startsWith('group:') }">
-                    <div v-for="component in group.components" :key="component.id">
-                        
-                        <!-- <TextAreaComponent v-if="component.type === 'TextAreaComponent'"></TextAreaComponent>
-                        <ImageComponent v-else-if="component.type === 'ImageComponent'"></ImageComponent>
-                        <HeaderComponent v-else-if="component.type === 'HeaderComponent'"></HeaderComponent> -->
-
-
+                <div :class="{ 'flex gap-5 w-full justify-between': group.groupId.startsWith('group:') }">
+                    <div v-for="component in group.components" :key="component.id" class="flex-1 mt-4">
                         <component :is="componentsMap[component.type]" :component="component"/>
                     </div>
                 </div>
