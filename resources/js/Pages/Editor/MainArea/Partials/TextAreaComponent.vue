@@ -27,13 +27,31 @@ const props = defineProps({
 // });
 
 
+const testModel = [
+        {
+            type: "paragraph",
+            content: [
+                {
+                    text: "Hello World ",
+                    styles: {},
+                },
+                {
+                    text: "Hello World ",
+                    styles: {},
+                },
+            ],
+            styles: {} //global paragraph style
+        },
+    ];
+
+
 </script>
 
 
 <template>
    <!-- {{ component.type }} -->
 
-   <TextEditor :content="component.content" />
+   <TextEditor :content="testModel" />
 
    <!-- <textarea
         class="border-none focus:outline-none focus:border-none focus:ring-2 focus:ring-gray-300 rounded-md font-sans resize-none block w-full text-md"
