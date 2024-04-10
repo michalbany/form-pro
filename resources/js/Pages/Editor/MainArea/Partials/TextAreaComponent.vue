@@ -35,12 +35,18 @@ const testModel = [
                     text: "Hello World ",
                     styles: {},
                 },
+            ],
+            styles: {'text-left': true} //global paragraph style
+        },
+        {
+            type: "paragraph",
+            content: [
                 {
                     text: "Hello World ",
                     styles: {},
                 },
             ],
-            styles: {} //global paragraph style
+            styles: {'text-left': true} //global paragraph style
         },
     ];
 

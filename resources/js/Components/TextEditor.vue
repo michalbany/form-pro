@@ -2,25 +2,10 @@
 import { ref } from "vue";
 import ToolbarButton from "@/Components/TextEditorButton.vue";
 import { reactive } from "vue";
+import EditorModel from "@/lib/EditorModel";
+import { onMounted } from "vue";
+import { onUnmounted } from "vue";
 
-// const editorModel = ref({
-//     blocks: [
-//         {
-//             type: "paragraph",
-//             content: [
-//                 {
-//                     text: "Hello World ",
-//                     styles: {bold: true},
-//                 },
-//                 {
-//                     text: "Hello World2",
-//                     styles: {italic: true, strikethrough: true, 'text-red-400': true},
-//                 },
-//             ],
-//             styles: {} //global paragraph style
-//         },
-//     ],
-// });
 
 const props = defineProps({
     content: Array,
@@ -32,107 +17,96 @@ function setEditorRef(el) {
     editorRef.value = el;
 }
 
-class EditorModel {
-    constructor(blocks) {
-        this.blocks = blocks;
-    }
+const selectedLayout = ref([]);
+const selectedFormats = ref([]);
 
-    parseContent(blockIndex, contentIndex, range) {
-        // Funkce pro zozdělení contentu v bloku na více contentů podle selection
-        // Vytvořte nový blok s novým contentem
-        const contentPiece = this.blocks[blockIndex].content[contentIndex];
-        const selectionStart = range.startOffset;
-        const selectionEnd = range.endOffset;
+onMounted(() => {
+    document.addEventListener("selectionchange", getAllSelectedClasses);
+});
 
-        let newContentIndex = contentIndex;
-
-        // Není možné aby byl content rozdělen na více než 3 části
-        const beforeText = contentPiece.text.substring(0, selectionStart);
-        const selectedText = contentPiece.text.substring(selectionStart, selectionEnd);
-        const afterText = contentPiece.text.substring(selectionEnd);
-
-        // Vytvoření nových contentů
-        const newContents = [];
-        if (beforeText) {
-            newContents.push({ text: beforeText, styles: JSON.parse(JSON.stringify(contentPiece.styles)) });
-            newContentIndex++;
-        }
-
-        newContents.push({ text: selectedText, styles: JSON.parse(JSON.stringify(contentPiece.styles)) });
-
-        if (afterText) {
-            newContents.push({ text: afterText, styles: JSON.parse(JSON.stringify(contentPiece.styles)) });
-        }
-        // Přidáme nové contenty do bloku a smažeme původní
-        this.blocks[blockIndex].content.splice(contentIndex, 1, ...newContents);
-
-        return newContentIndex;
-    }
-
-    mergeContents(blockIndex, contentIndex, range) {
-        //
-    }
-
-
-    findContent(blockIndex, contentIndex) {
-        return this.blocks[blockIndex].content[contentIndex].text;
-    }
-
-    toggleStyle(blockIndex, contentIndex, style) {
-        let path = "";
-
-        if (contentIndex !== null) {
-            path = this.blocks[blockIndex].content[contentIndex].styles;
-            // Pokud styl už existuje smažeme ho
-            if (path[style]) {
-                delete path[style];
-            } else {
-                path[style] = true;
-            }
-        } else {
-            // Pro blockstyles přepisujeme styly
-            this.blocks[blockIndex].styles = { [style]: true };
-        }
-
-        console.log(this.blocks[blockIndex]);
-    }
-
-}
+onUnmounted(() => {
+    document.removeEventListener("selectionchange", getAllSelectedClasses);
+});
 
 // Inicializace editoru
 const editorModel = reactive(new EditorModel(props.content));
 
 function format(style) {
     // @todo: Pokud se content v blocku není cely znamená to, že uživatel vybral text i z bloku za, budeme se tedy dívat do dalších bloků tak dlouho dokud nebudeme mít kompletní string
-    const { text, range, blockIndex, contentIndex } = getSelectedText();
+    const { text, range, blockIndex, contentIndex, editor } = getSelectedText();
 
     // pokud se jedná o globální styl bloku pouze provedeme toggleStyle
-    if (style === "text-center" || style === "text-left" || style === "text-right") {
-        editorModel.toggleStyle(blockIndex, null, style);
-    }
-
+    
     if (text && range) {
+        if (style === "text-center" || style === "text-left" || style === "text-right") {
+            editorModel.toggleStyle(blockIndex, null, style);
+        }
         // pokud se obsah rovna nemusíme rozdělovat bloky a hned aplikovat styly
-        const textContent = editorModel.findContent(blockIndex, contentIndex);
+        const textContent = editorModel.findText(blockIndex, contentIndex);
 
         if (textContent.trim() === text.trim()) {
-            editorModel.toggleStyle(blockIndex, contentIndex, style);
             console.log("Text is equal to content")
+            editorModel.toggleStyle(blockIndex, contentIndex, style, editor);
         } else if (textContent.includes(text)) {
             // Pokud text v bloku obsahuje cely vybrany text tak to znamena že uživatel vybral text z jednoho bloku
             console.log("Text is in one block")
-
             // Musíme block rozdělit na více contentů funkce by měla vracet pozici nového contentu
             const newIndex = editorModel.parseContent(blockIndex, contentIndex, range);
-            editorModel.toggleStyle(blockIndex, newIndex, style)
+            editorModel.toggleStyle(blockIndex, newIndex, style, editor)
         } else {
             // Uživatel vybral text z více bloků   
             console.log("Text is in multiple blocks")
+            // Musíme najít všechny bloky a contenty které obsahují vybraný text a sloučit je do jednoho contentu
+            const newIndex = editorModel.mergeContents(blockIndex, contentIndex, range, text);
+            editorModel.toggleStyle(blockIndex, newIndex, style, editor)
         }
-
-        // editorModel.formatBlockContent(blockIndex, contentIndex, range, { [style]: true });
     }
 }
+
+
+// 2 funkce pro zjišťování aktivní formátování
+function getAllSelectedClasses() {
+    const selection = window.getSelection();
+    if (selection.rangeCount > 0) {
+        const range = selection.getRangeAt(0);
+        const editor = editorRef.value;
+
+        if (editor.contains(range.commonAncestorContainer) || editor.contains(range.startContainer)) {
+            // Získání všech elementů uvnitř rozsahu výběru
+            const elements = getElementsWithinRange(range, editor);
+            const selectedClasses = new Set(); // Používáme Set pro uchování unikátních hodnot
+            const layoutFormat = []
+
+            const layout = elements[0].childNodes[0].classList;
+            layout.forEach(className => layoutFormat.push(className));
+
+            elements.forEach(element => {
+                if (element.tagName === "SPAN") {
+                    element.classList.forEach(className => selectedClasses.add(className));
+                }
+            });
+
+            selectedFormats.value = Array.from(selectedClasses);
+            selectedLayout.value = Array.from(layoutFormat);
+        }
+    }
+}
+
+function getElementsWithinRange(range, container) {
+    const elements = [];
+    const treeWalker = document.createTreeWalker(container, NodeFilter.SHOW_ELEMENT);
+
+    while (treeWalker.nextNode()) {
+        const currentNode = treeWalker.currentNode;
+        // Pokud je element částečně nebo plně uvnitř rozsahu, přidáme ho
+        if (range.intersectsNode(currentNode)) {
+            elements.push(currentNode);
+        }
+    }
+
+    return elements;
+}
+
 
 function getSelectedText() {
     if (!editorRef.value)
@@ -146,16 +120,22 @@ function getSelectedText() {
 
         // získání data atributů z elementu
         const startNode = range.startContainer.parentNode;
-        const blockIndex = startNode.dataset.blockIndex;
+        const endNode = range.endContainer.parentNode;
+        const blockIndex = startNode.dataset.blockIndex === endNode.dataset.blockIndex ? startNode.dataset.blockIndex : null;
         const contentIndex = startNode.dataset.contentIndex;
 
-        if (editor.contains(range.commonAncestorContainer)) {
+        // Kromě ošetření že se jedná o výběr v editoru potřebujeme vědět zda jsme vybrali pouze 1 blok
+        if (editor.contains(range.commonAncestorContainer) && blockIndex !== null) {
             // Výběr je uvnitř editoru
+
+            // Zde zjistíme jaké jsou selectnuté classes
+
             return {
                 text: selection.toString(),
                 range,
                 blockIndex: blockIndex ? parseInt(blockIndex, 10) : null,
                 contentIndex: contentIndex ? parseInt(contentIndex, 10) : null,
+                editor
             };
         }
     }
@@ -163,38 +143,31 @@ function getSelectedText() {
     return { text: "", range: null, blockIndex: null, contentIndex: null };
 }
 
-function handleInput(e) {
-    // převod vstupu uživatele na JSON model
-}
 
-const selected = false;
 </script>
 
 <template>
     <!-- Tool Bar -->
     <div class="flex gap-4">
         <div class="flex gap-1">
-            <ToolbarButton :selected="selected" @click="format('heading')" icon="heading" title="heading" />
+            <ToolbarButton @click="format('heading')" icon="heading" title="heading" />
         </div>
         <div class="flex gap-1">
-            <ToolbarButton :selected="selected" @click="format('bold')" icon="bold" title="bold" />
-            <ToolbarButton :selected="selected" @click="format('italic')" icon="italic" title="italic" />
-            <ToolbarButton :selected="selected" @click="format('underline')" icon="underline" title="underline" />
-            <ToolbarButton :selected="selected" @click="format('strikethrough')" icon="strikethrough"
-                title="strikethrough" />
-            <ToolbarButton :selected="selected" @click="format('text-blue-500')" icon="font-color" title="color" />
+            <ToolbarButton :selected="selectedFormats.includes('bold')" @click="format('bold')" icon="bold" title="bold" />
+            <ToolbarButton :selected="selectedFormats.includes('italic')" @click="format('italic')" icon="italic" title="italic" />
+            <ToolbarButton :selected="selectedFormats.includes('underline')" @click="format('underline')" icon="underline" title="underline" />
+            <ToolbarButton :selected="selectedFormats.includes('strikethrough')" @click="format('strikethrough')" icon="strikethrough" title="strikethrough" />
+            <ToolbarButton :selected="selectedFormats.includes('text-blue-500')" @click="format('text-blue-500')" icon="font-color" title="color" />
         </div>
 
         <div class="flex gap-1">
-            <ToolbarButton :selected="selected" @click="format('text-left')" icon="align-left" title="align-left" />
-            <ToolbarButton :selected="selected" @click="format('text-center')" icon="align-middle"
-                title="align-middle" />
-            <ToolbarButton :selected="selected" @click="format('text-right')" icon="align-right" title="align-right" />
+            <ToolbarButton :selected="selectedLayout.includes('text-left')" @click="format('text-left')" icon="align-left" title="align-left" />
+            <ToolbarButton :selected="selectedLayout.includes('text-center')" @click="format('text-center')" icon="align-middle" title="align-middle" />
+            <ToolbarButton :selected="selectedLayout.includes('text-right')" @click="format('text-right')" icon="align-right" title="align-right" />
         </div>
     </div>
     <!-- Content with Text -->
     <div :ref="setEditorRef" contenteditable="true" @input="handleInput">
-        <!-- {{ editorContent }} -->
 
         <div v-for="(block, blockIndex) in editorModel.blocks" :key="blockIndex">
             <p v-if="block.type === 'paragraph'" :class="block.styles">
